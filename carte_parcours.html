@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parcours Militaire — Alfred Marafico | 12ᵉ RCA · 2ᵉ DB Leclerc</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    background: #0d1117;
+    overflow: hidden;
+    height: 100vh;
+  }
+
+  #map {
+    width: 100%;
+    height: 100%;
+    background: #1a1a2e;
+  }
+
+  /* --- Panneau latéral --- */
+  #sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 420px;
+    height: 100vh;
+    background: linear-gradient(180deg, #0b0e14 0%, #121a24 40%, #0d1520 100%);
+    color: #d4c9a8;
+    z-index: 1000;
+    padding: 30px 28px 20px;
+    overflow-y: auto;
+    border-right: 2px solid #2c3e50;
+    box-shadow: 6px 0 30px rgba(0,0,0,0.6);
+    display: flex;
+    flex-direction: column;
+  }
+
+  #sidebar::-webkit-scrollbar { width: 5px; }
+  #sidebar::-webkit-scrollbar-thumb { background: #3a5068; border-radius: 3px; }
+
+  .sidebar-header {
+    text-align: center;
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #2c3e50;
+  }
+
+  .sidebar-header .insigne {
+    font-size: 42px;
+    margin-bottom: 6px;
+    filter: drop-shadow(0 2px 4px rgba(180,150,80,0.3));
+  }
+
+  .sidebar-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.55rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: #ffe680;
+    line-height: 1.3;
+    margin-bottom: 6px;
+    text-shadow: 0 0 10px rgba(255,230,128,0.25);
+  }
+
+  .sidebar-header .subtitle {
+    font-size: 0.95rem;
+    font-style: italic;
+    color: #c0ccd8;
+    letter-spacing: 0.03em;
+  }
+
+  .sidebar-header .dates {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 6px 18px;
+    border: 1.5px solid #5a7088;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: #ddd0a0;
+    background: rgba(201,168,76,0.12);
+  }
+
+  /* --- Légende --- */
+  .legend-box {
+    background: rgba(20,28,38,0.8);
+    border: 1px solid #2c3e50;
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-bottom: 20px;
+    flex-shrink: 0;
+  }
+
+  .legend-box .legend-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: #ffe680;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 7px;
+    font-size: 0.9rem;
+    color: #d0d8e0;
+    font-weight: 500;
+  }
+
+  .legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .legend-line {
+    width: 24px;
+    height: 2px;
+    flex-shrink: 0;
+  }
+
+  .legend-dot.maroc { background: #e74c3c; box-shadow: 0 0 6px #e74c3c88; }
+  .legend-dot.algerie { background: #e67e22; box-shadow: 0 0 6px #e67e2288; }
+  .legend-dot.angleterre { background: #3498db; box-shadow: 0 0 6px #3498db88; }
+  .legend-dot.france { background: #2ecc71; box-shadow: 0 0 6px #2ecc7188; }
+  .legend-dot.vosges { background: #9b59b6; box-shadow: 0 0 6px #9b59b688; }
+  .legend-dot.alsace { background: #f39c12; box-shadow: 0 0 6px #f39c1288; }
+  .legend-dot.atlantique { background: #1abc9c; box-shadow: 0 0 6px #1abc9c88; }
+  .legend-dot.allemagne { background: #c0392b; box-shadow: 0 0 6px #c0392b88; }
+  .legend-dot.tunisie { background: #f1c40f; box-shadow: 0 0 6px #f1c40f88; }
+  .legend-line.track { background: linear-gradient(90deg, #c9a84c, #e6d088); }
+
+  /* --- Liste des étapes --- */
+  .steps-container {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 6px;
+  }
+  .steps-container::-webkit-scrollbar { width: 4px; }
+  .steps-container::-webkit-scrollbar-thumb { background: #3a5068; border-radius: 2px; }
+
+  .step-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    background: rgba(20,28,38,0.5);
+    border: 1px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .step-card:hover {
+    background: rgba(40,52,68,0.7);
+    border-color: #3a5068;
+    transform: translateX(4px);
+  }
+
+  .step-card .step-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #c9a84c;
+    min-width: 28px;
+    text-align: center;
+    line-height: 1;
+    padding-top: 1px;
+  }
+
+  .step-card .step-info {
+    flex: 1;
+  }
+
+  .step-card .step-name {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #f0e8cc;
+    letter-spacing: 0.02em;
+    margin-bottom: 3px;
+  }
+
+  .step-card .step-desc {
+    font-size: 0.82rem;
+    color: #c0c8d4;
+    font-style: italic;
+    line-height: 1.45;
+  }
+
+  .step-card.finale {
+    border-color: #c9a84c44;
+    background: rgba(201,168,76,0.08);
+  }
+  .step-card.finale .step-num { color: #e6d088; font-size: 1.5rem; }
+
+  /* --- Footer --- */
+  .sidebar-footer {
+    text-align: center;
+    padding-top: 14px;
+    border-top: 1px solid #3a5068;
+    margin-top: 12px;
+    font-size: 0.82rem;
+    color: #8899aa;
+    letter-spacing: 0.04em;
+    flex-shrink: 0;
+  }
+
+  /* --- Leaflet overrides --- */
+  .leaflet-tooltip.permanent-label {
+    background: rgba(5,8,12,0.97);
+    border: 1.5px solid #6b8aaa;
+    border-radius: 10px;
+    color: #ffffff;
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 12px 16px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.8), 0 0 12px rgba(201,168,76,0.2);
+    white-space: normal;
+    max-width: 300px;
+    text-align: left;
+    pointer-events: auto;
+    line-height: 1.5;
+  }
+
+  .leaflet-tooltip.permanent-label::before {
+    border-top-color: #6b8aaa !important;
+  }
+
+  .leaflet-tooltip.permanent-label .lbl-name {
+    font-weight: 700;
+    color: #ffe680;
+    font-size: 0.95rem;
+    display: block;
+    margin-bottom: 5px;
+    letter-spacing: 0.04em;
+    text-shadow: 0 0 8px rgba(255,230,128,0.35);
+  }
+
+  .leaflet-tooltip.permanent-label .lbl-desc {
+    color: #e8e8e8;
+    font-size: 0.85rem;
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  /* --- Custom marker style --- */
+  .custom-marker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #1a2a3a;
+    border: 2px solid #c9a84c;
+    color: #c9a84c;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 0.7rem;
+    box-shadow: 0 0 10px rgba(201,168,76,0.4), 0 2px 8px rgba(0,0,0,0.5);
+    transition: transform 0.2s;
+  }
+
+  .custom-marker.finale {
+    background: #c9a84c;
+    color: #0d1117;
+    border-color: #e6d088;
+    width: 34px;
+    height: 34px;
+    font-size: 0.8rem;
+    box-shadow: 0 0 18px rgba(201,168,76,0.7), 0 3px 10px rgba(0,0,0,0.6);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 10px rgba(201,168,76,0.4), 0 2px 8px rgba(0,0,0,0.5); }
+    50%      { box-shadow: 0 0 22px rgba(201,168,76,0.9), 0 3px 14px rgba(0,0,0,0.7); }
+  }
+
+  /* --- Bouton toggle --- */
+  #toggle-labels {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1001;
+    background: rgba(10,14,20,0.9);
+    border: 1px solid #3a5068;
+    border-radius: 25px;
+    color: #c9a84c;
+    padding: 10px 18px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    transition: all 0.25s;
+    backdrop-filter: blur(6px);
+  }
+
+  #toggle-labels:hover {
+    background: rgba(30,40,54,0.95);
+    border-color: #c9a84c;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    #sidebar {
+      width: 100%;
+      height: auto;
+      max-height: 40vh;
+      position: fixed;
+      bottom: 0;
+      top: auto;
+      border-right: none;
+      border-top: 2px solid #2c3e50;
+      border-radius: 16px 16px 0 0;
+      flex-direction: column;
+      padding: 16px 18px 10px;
+    }
+    .sidebar-header h1 { font-size: 1.1rem; }
+    .steps-container { max-height: 150px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<button id="toggle-labels" title="Afficher/Masquer les descriptions">📝 Étiquettes</button>
+
+<div id="sidebar">
+  <div class="sidebar-header">
+    <div class="insigne">🎖️</div>
+    <h1>Parcours Militaire<br>Alfred Marafico</h1>
+    <div class="subtitle">12ᵉ RCA — 2ᵉ DB du Général Leclerc</div>
+    <div class="dates">4 mars 1943 — 24 novembre 1945</div>
+  </div>
+
+  <div class="legend-box">
+    <div class="legend-title">⏣ Étapes par région</div>
+    <div class="legend-item"><span class="legend-dot maroc"></span> Maroc</div>
+    <div class="legend-item"><span class="legend-dot algerie"></span> Algérie</div>
+    <div class="legend-item"><span class="legend-dot angleterre"></span> Angleterre</div>
+    <div class="legend-item"><span class="legend-dot france"></span> France · Normandie & Paris</div>
+    <div class="legend-item"><span class="legend-dot vosges"></span> Vosges · Lorraine</div>
+    <div class="legend-item"><span class="legend-dot alsace"></span> Alsace · Colmar</div>
+    <div class="legend-item"><span class="legend-dot atlantique"></span> Atlantique · Royan</div>
+    <div class="legend-item"><span class="legend-dot allemagne"></span> Allemagne</div>
+    <div class="legend-item"><span class="legend-dot tunisie"></span> Tunisie</div>
+    <div class="legend-item"><span class="legend-line track"></span> Trajet complet</div>
+  </div>
+
+  <div class="steps-container" id="steps-list">
+    <!-- Rempli dynamiquement -->
+  </div>
+
+  <div class="sidebar-footer">
+    En mémoire d'Alfred Marafico · 12ᵉ Régiment de Chasseurs d'Afrique · Division Leclerc
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+// ============================================================
+// DONNÉES — 27 étapes du parcours
+// ============================================================
+const steps = [
+  { order: 1,  name: "Casablanca",        region: "Maroc",       desc: "4 mars 1943 — Arrivée au 12ᵉ RCA, 4ᵉ escadron.",                                               lat: 33.5731, lon: -7.5898, color: "#e74c3c" },
+  { order: 2,  name: "Témara",            region: "Maroc",       desc: "28 sept 1943 — Mouvement vers Témara.",                                                         lat: 33.9267, lon: -6.9076, color: "#e74c3c" },
+  { order: 3,  name: "Frontière algéro-marocaine", region: "Algérie", desc: "8 sept 1943 — Franchissement de la frontière.",                                        lat: 34.8230, lon: -1.7230, color: "#e67e22" },
+  { order: 4,  name: "Hassi Ben Okba",    region: "Algérie",     desc: "13 avril 1944 — Arrivée et bivouac près d'Oran.",                                              lat: 35.6833, lon: -0.4667, color: "#e67e22" },
+  { order: 5,  name: "Mers El Kébir",     region: "Algérie",     desc: "20 mai 1944 — Embarquement pour l'Angleterre.",                                                lat: 35.7270, lon: -0.7080, color: "#e67e22" },
+  { order: 6,  name: "Liverpool",         region: "Angleterre",  desc: "31 mai 1944 — Débarquement, mouvement vers Fimber (Yorkshire).",                               lat: 53.4084, lon: -2.9916, color: "#3498db" },
+  { order: 7,  name: "Fimber",            region: "Angleterre",  desc: "Juin–juillet 1944 — Bivouac de Fimber (Yorkshire).",                                           lat: 53.9620, lon: -0.6370, color: "#3498db" },
+  { order: 8,  name: "Bournemouth",       region: "Angleterre",  desc: "28 juillet 1944 — Mouvement de la 2ᵉ DB vers le sud.",                                          lat: 50.7192, lon: -1.8808, color: "#3498db" },
+  { order: 9,  name: "Weymouth",          region: "Angleterre",  desc: "29–31 juillet 1944 — Embarquement pour la France.",                                            lat: 50.6076, lon: -2.4535, color: "#3498db" },
+  { order: 10, name: "Utah Beach",        region: "Normandie",   desc: "28 août 1944 — Débarquement en Normandie. Banc de la Madeleine.",                              lat: 49.4134, lon: -1.1748, color: "#2ecc71" },
+  { order: 11, name: "Vesly",             region: "Normandie",   desc: "2–5 sept 1944 — Stationnement avant opérations (La Haye-du-Puits).",                            lat: 49.2854, lon: -1.4983, color: "#2ecc71" },
+  { order: 12, name: "Le Mans",           region: "Normandie",   desc: "9–11 août 1944 — Combats du Mans à Alençon. Campagne de Normandie.",                            lat: 48.0061, lon: 0.1996,  color: "#2ecc71" },
+  { order: 13, name: "Alençon",           region: "Normandie",   desc: "9–12 août 1944 — Bataille de la Forêt d'Écouves contre un train blindé allemand.",              lat: 48.4297, lon: 0.0919,  color: "#2ecc71" },
+  { order: 14, name: "Libération de Paris", region: "Paris",     desc: "24 août 1944 — Vallée de la Bièvre. Libération de Paris avec la 2ᵉ DB.",                         lat: 48.7960, lon: 2.3270,  color: "#2ecc71" },
+  { order: 15, name: "Dompaire",          region: "Vosges",      desc: "12–15 sept 1944 — Bataille de chars décisive. Brigade blindée allemande détruite.",             lat: 48.2219, lon: 6.3419,  color: "#9b59b6" },
+  { order: 16, name: "Vezouze & Blette",  region: "Lorraine",    desc: "31 oct–2 nov 1944 — Combats de la Vezouze et de la Blette.",                                    lat: 48.6711, lon: 6.8642,  color: "#9b59b6" },
+  { order: 17, name: "Sarre Blanche / Dabo", region: "Alsace",   desc: "19–21 nov 1944 — Combats dans la région de Dabo.",                                              lat: 48.6997, lon: 7.1981,  color: "#f39c12" },
+  { order: 18, name: "Strasbourg",        region: "Alsace",      desc: "23–25 nov 1944 — Libération de Strasbourg. Serment de Koufra accompli.",                        lat: 48.5839, lon: 7.7455,  color: "#f39c12" },
+  { order: 19, name: "Kilstett",          region: "Alsace",      desc: "22 janvier 1945 — Affaires de Kilstett.",                                                      lat: 48.8155, lon: 7.9928,  color: "#f39c12" },
+  { order: 20, name: "Neuf-Brisach",      region: "Alsace",      desc: "6–11 fév 1945 — Combats de la Poche de Colmar.",                                               lat: 48.0201, lon: 7.5295,  color: "#f39c12" },
+  { order: 21, name: "Royan",             region: "Atlantique",  desc: "14–17 avril 1945 — Réduction de la poche allemande de Royan.",                                  lat: 45.6230, lon: -1.0431, color: "#1abc9c" },
+  { order: 22, name: "Karlsruhe",         region: "Allemagne",   desc: "30 avril 1945 — Entrée en Allemagne. Campagne d'Allemagne avec la 2ᵉ DB.",                     lat: 49.0069, lon: 8.4037,  color: "#c0392b" },
+  { order: 23, name: "Paris (Retour)",    region: "Paris",       desc: "30 mai 1945 — La 2ᵉ DB stationne en région parisienne.",                                       lat: 48.8566, lon: 2.3522,  color: "#2ecc71" },
+  { order: 24, name: "Nemours",           region: "Île-de-France", desc: "3 juin 1945 — Cantonnement à Nemours (Seine-et-Marne).",                                     lat: 48.2683, lon: 2.6933,  color: "#2ecc71" },
+  { order: 25, name: "Toulon",            region: "Provence",    desc: "11 août 1945 — Embarquement pour la Tunisie.",                                                 lat: 43.1242, lon: 5.9280,  color: "#2ecc71" },
+  { order: 26, name: "Tunis",             region: "Tunisie",     desc: "13 août 1945 — Débarquement à Tunis.",                                                         lat: 36.8065, lon: 10.1815, color: "#f1c40f" },
+  { order: 27, name: "Metlaoui",          region: "Tunisie",     desc: "24 nov 1945 — Démobilisé. Se retire à Metlaoui (Gafsa). ✦ FIN DU PARCOURS ✦",                 lat: 34.3870, lon: 8.4040,  color: "#f1c40f", finale: true }
+];
+
+// ============================================================
+// CARTE — Initialisation
+// ============================================================
+const map = L.map('map', {
+  center: [44.0, 2.5],
+  zoom: 5,
+  zoomControl: false,
+  attributionControl: false
+});
+
+// Fond de carte sombre élégant (CartoDB Dark Matter)
+L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+  maxZoom: 19,
+  subdomains: 'abcd'
+}).addTo(map);
+
+// Contrôle zoom discret
+L.control.zoom({ position: 'bottomright' }).addTo(map);
+
+// Attribution discrète
+L.control.attribution({ position: 'bottomleft', prefix: '' }).addTo(map);
+
+// ============================================================
+// TRACÉ — Ligne du parcours complet
+// ============================================================
+const trackCoords = steps.map(s => [s.lat, s.lon]);
+
+const trackLine = L.polyline(trackCoords, {
+  color: '#c9a84c',
+  weight: 3,
+  opacity: 0.75,
+  dashArray: '8 4',
+  lineCap: 'round',
+  lineJoin: 'round',
+  className: 'parcours-track'
+}).addTo(map);
+
+// Effet de lueur sous la ligne
+const trackGlow = L.polyline(trackCoords, {
+  color: '#c9a84c',
+  weight: 8,
+  opacity: 0.18,
+  lineCap: 'round',
+  lineJoin: 'round'
+}).addTo(map);
+
+// ============================================================
+// MARQUEURS + ÉTIQUETTES PERMANENTES
+// ============================================================
+const markers = [];
+const labels = [];
+let labelsVisible = true;
+
+steps.forEach((step, index) => {
+  // Icône personnalisée en HTML
+  const iconSize = step.finale ? 34 : 26;
+  const iconHtml = `<div class="custom-marker${step.finale ? ' finale' : ''}" style="border-color:${step.color}; color:${step.finale ? '#0d1117' : step.color};${step.finale ? 'background:'+step.color+';' : ''}">${step.order}</div>`;
+
+  const icon = L.divIcon({
+    html: iconHtml,
+    className: '',
+    iconSize: [iconSize, iconSize],
+    iconAnchor: [iconSize/2, iconSize/2]
+  });
+
+  const marker = L.marker([step.lat, step.lon], { icon }).addTo(map);
+  markers.push(marker);
+
+  // Étiquette PERMANENTE (tooltip toujours visible)
+  const labelText = `<span class="lbl-name">${step.order}. ${step.name}</span><span class="lbl-desc">${step.desc}</span>`;
+
+  const label = marker.bindTooltip(labelText, {
+    permanent: true,
+    direction: step.order % 2 === 0 ? 'left' : 'right',
+    offset: step.order % 2 === 0 ? [-18, 0] : [18, 0],
+    className: 'permanent-label'
+  });
+  labels.push(label);
+});
+
+// ============================================================
+// BOUTON — Afficher/Masquer les étiquettes
+// ============================================================
+document.getElementById('toggle-labels').addEventListener('click', () => {
+  labelsVisible = !labelsVisible;
+  markers.forEach((marker, i) => {
+    if (labelsVisible) {
+      const step = steps[i];
+      const labelText = `<span class="lbl-name">${step.order}. ${step.name}</span><span class="lbl-desc">${step.desc}</span>`;
+      marker.bindTooltip(labelText, {
+        permanent: true,
+        direction: step.order % 2 === 0 ? 'left' : 'right',
+        offset: step.order % 2 === 0 ? [-18, 0] : [18, 0],
+        className: 'permanent-label'
+      });
+    } else {
+      marker.unbindTooltip();
+    }
+  });
+  document.getElementById('toggle-labels').textContent = labelsVisible ? '📝 Étiquettes' : '📝 Étiquettes (masquées)';
+});
+
+// ============================================================
+// BARRE LATÉRALE — Liste cliquable des étapes
+// ============================================================
+const stepsContainer = document.getElementById('steps-list');
+
+steps.forEach(step => {
+  const card = document.createElement('div');
+  card.className = 'step-card' + (step.finale ? ' finale' : '');
+  card.innerHTML = `
+    <div class="step-num">${step.order}</div>
+    <div class="step-info">
+      <div class="step-name">${step.name} <span style="color:${step.color}; font-size:0.65rem;">● ${step.region}</span></div>
+      <div class="step-desc">${step.desc}</div>
+    </div>
+  `;
+
+  card.addEventListener('click', () => {
+    map.flyTo([step.lat, step.lon], step.finale ? 7 : 8, {
+      duration: 1.2,
+      easeLinearity: 0.25
+    });
+    // Flash effet sur le marker
+    const markerEl = markers[step.order - 1].getElement();
+    if (markerEl) {
+      markerEl.style.transform = 'scale(1.5)';
+      setTimeout(() => { markerEl.style.transform = ''; }, 300);
+    }
+  });
+
+  stepsContainer.appendChild(card);
+});
+
+// ============================================================
+// AJUSTEMENT — Zoom pour voir tout le parcours
+// ============================================================
+const allCoords = steps.map(s => [s.lat, s.lon]);
+const bounds = L.latLngBounds(allCoords);
+map.fitBounds(bounds.pad(0.18));
+
+// ============================================================
+// Touche Échap pour reset vue
+// ============================================================
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    map.flyToBounds(bounds.pad(0.18), { duration: 1.0 });
+  }
+});
+
+console.log('🗺️  Carte du parcours militaire d\'Alfred Marafico prête.');
+console.log('   27 étapes | 12ᵉ RCA · 2ᵉ DB Leclerc | 1943–1945');
+console.log('   Appuyez sur Échap pour réinitialiser la vue.');
+</script>
+</body>
+</html>
