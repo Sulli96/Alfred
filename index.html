@@ -17,122 +17,37 @@
     height: 100vh;
   }
 
-  #map {
-    width: 100%;
-    height: 100%;
-    background: #1a1a2e;
-  }
+  #map { width: 100%; height: 100%; background: #1a1a2e; }
 
   /* --- Panneau latéral --- */
   #sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 420px;
-    height: 100vh;
+    position: fixed; top: 0; left: 0;
+    width: 420px; height: 100vh;
     background: linear-gradient(180deg, #0b0e14 0%, #121a24 40%, #0d1520 100%);
-    color: #d4c9a8;
-    z-index: 1000;
+    color: #d4c9a8; z-index: 1000;
     padding: 30px 28px 20px;
     overflow-y: auto;
     border-right: 2px solid #2c3e50;
     box-shadow: 6px 0 30px rgba(0,0,0,0.6);
-    display: flex;
-    flex-direction: column;
+    display: flex; flex-direction: column;
   }
-
   #sidebar::-webkit-scrollbar { width: 5px; }
   #sidebar::-webkit-scrollbar-thumb { background: #3a5068; border-radius: 3px; }
 
-  .sidebar-header {
-    text-align: center;
-    margin-bottom: 25px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #2c3e50;
-  }
-
-  .sidebar-header .insigne {
-    font-size: 42px;
-    margin-bottom: 6px;
-    filter: drop-shadow(0 2px 4px rgba(180,150,80,0.3));
-  }
-
-  .sidebar-header h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.55rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    color: #ffe680;
-    line-height: 1.3;
-    margin-bottom: 6px;
-    text-shadow: 0 0 10px rgba(255,230,128,0.25);
-  }
-
-  .sidebar-header .subtitle {
-    font-size: 0.95rem;
-    font-style: italic;
-    color: #c0ccd8;
-    letter-spacing: 0.03em;
-  }
-
-  .sidebar-header .dates {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 6px 18px;
-    border: 1.5px solid #5a7088;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    color: #ddd0a0;
-    background: rgba(201,168,76,0.12);
-  }
+  .sidebar-header { text-align: center; margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #2c3e50; }
+  .sidebar-header .insigne { font-size: 42px; margin-bottom: 6px; filter: drop-shadow(0 2px 4px rgba(180,150,80,0.3)); }
+  .sidebar-header h1 { font-family: 'Playfair Display', serif; font-size: 1.55rem; font-weight: 700; letter-spacing: 0.04em; color: #ffe680; line-height: 1.3; margin-bottom: 6px; text-shadow: 0 0 10px rgba(255,230,128,0.25); }
+  .sidebar-header .subtitle { font-size: 0.95rem; font-style: italic; color: #c0ccd8; letter-spacing: 0.03em; }
+  .sidebar-header .dates { display: inline-block; margin-top: 10px; padding: 6px 18px; border: 1.5px solid #5a7088; border-radius: 20px; font-size: 0.9rem; font-weight: 600; letter-spacing: 0.06em; color: #ddd0a0; background: rgba(201,168,76,0.12); }
 
   /* --- Légende --- */
-  .legend-box {
-    background: rgba(20,28,38,0.8);
-    border: 1px solid #2c3e50;
-    border-radius: 10px;
-    padding: 16px 18px;
-    margin-bottom: 20px;
-    flex-shrink: 0;
-  }
-
-  .legend-box .legend-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 0.95rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    color: #ffe680;
-    margin-bottom: 12px;
-    text-transform: uppercase;
-  }
-
-  .legend-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 7px;
-    font-size: 0.9rem;
-    color: #d0d8e0;
-    font-weight: 500;
-  }
-
-  .legend-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
-  .legend-line {
-    width: 24px;
-    height: 2px;
-    flex-shrink: 0;
-  }
-
-  .legend-dot.maroc { background: #e74c3c; box-shadow: 0 0 6px #e74c3c88; }
+  .legend-box { background: rgba(20,28,38,0.8); border: 1px solid #2c3e50; border-radius: 10px; padding: 16px 18px; margin-bottom: 20px; flex-shrink: 0; }
+  .legend-box .legend-title { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; letter-spacing: 0.06em; color: #ffe680; margin-bottom: 12px; text-transform: uppercase; }
+  .legend-item { display: flex; align-items: center; gap: 10px; margin-bottom: 7px; font-size: 0.9rem; color: #d0d8e0; font-weight: 500; }
+  .legend-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+  .legend-dot.prologue-leg { background: #b5936a; border: 2px dashed #b5936a; box-shadow: 0 0 5px #b5936a66; }
   .legend-dot.algerie { background: #e67e22; box-shadow: 0 0 6px #e67e2288; }
+  .legend-dot.maroc { background: #e74c3c; box-shadow: 0 0 6px #e74c3c88; }
   .legend-dot.angleterre { background: #3498db; box-shadow: 0 0 6px #3498db88; }
   .legend-dot.france { background: #2ecc71; box-shadow: 0 0 6px #2ecc7188; }
   .legend-dot.vosges { background: #9b59b6; box-shadow: 0 0 6px #9b59b688; }
@@ -140,367 +55,753 @@
   .legend-dot.atlantique { background: #1abc9c; box-shadow: 0 0 6px #1abc9c88; }
   .legend-dot.allemagne { background: #c0392b; box-shadow: 0 0 6px #c0392b88; }
   .legend-dot.tunisie { background: #f1c40f; box-shadow: 0 0 6px #f1c40f88; }
+  .legend-line { width: 24px; height: 2px; flex-shrink: 0; }
   .legend-line.track { background: linear-gradient(90deg, #c9a84c, #e6d088); }
+  .legend-line.prologue-track { background: linear-gradient(90deg, #b5936a, #d4a87a); opacity: 0.7; border-top: 1px dashed #b5936a; }
+
+  /* --- Section headers dans la liste --- */
+  .section-header {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 10px 14px 8px;
+    margin: 4px 0 6px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-header.prologue-header {
+    color: #c4a07a;
+    background: rgba(181,147,106,0.1);
+    border-left: 3px solid #b5936a;
+  }
+  .section-header.campaign-header {
+    color: #c9a84c;
+    background: rgba(201,168,76,0.08);
+    border-left: 3px solid #c9a84c;
+    margin-top: 14px;
+  }
 
   /* --- Liste des étapes --- */
-  .steps-container {
-    flex: 1;
-    overflow-y: auto;
-    padding-right: 6px;
-  }
+  .steps-container { flex: 1; overflow-y: auto; padding-right: 6px; }
   .steps-container::-webkit-scrollbar { width: 4px; }
   .steps-container::-webkit-scrollbar-thumb { background: #3a5068; border-radius: 2px; }
 
   .step-card {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 12px 14px;
-    margin-bottom: 8px;
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 12px 14px; margin-bottom: 8px;
     background: rgba(20,28,38,0.5);
-    border: 1px solid transparent;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.25s ease;
+    border: 1px solid transparent; border-radius: 8px;
+    cursor: pointer; transition: all 0.25s ease;
   }
+  .step-card:hover { background: rgba(40,52,68,0.7); border-color: #3a5068; transform: translateX(4px); }
+  .step-card.prologue-card { background: rgba(30,22,14,0.5); }
+  .step-card.prologue-card:hover { background: rgba(55,38,22,0.7); border-color: #7a5a38; }
 
-  .step-card:hover {
-    background: rgba(40,52,68,0.7);
-    border-color: #3a5068;
-    transform: translateX(4px);
-  }
-
-  .step-card .step-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: #c9a84c;
-    min-width: 28px;
-    text-align: center;
-    line-height: 1;
-    padding-top: 1px;
-  }
-
-  .step-card .step-info {
-    flex: 1;
-  }
-
-  .step-card .step-name {
-    font-size: 0.92rem;
-    font-weight: 600;
-    color: #f0e8cc;
-    letter-spacing: 0.02em;
-    margin-bottom: 3px;
-  }
-
-  .step-card .step-desc {
-    font-size: 0.82rem;
-    color: #c0c8d4;
-    font-style: italic;
-    line-height: 1.45;
-  }
-
-  .step-card.finale {
-    border-color: #c9a84c44;
-    background: rgba(201,168,76,0.08);
-  }
+  .step-card .step-num { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: #c9a84c; min-width: 32px; text-align: center; line-height: 1; padding-top: 2px; }
+  .step-card.prologue-card .step-num { color: #b5936a; font-size: 0.95rem; }
+  .step-card .step-info { flex: 1; }
+  .step-card .step-name { font-size: 0.92rem; font-weight: 600; color: #f0e8cc; letter-spacing: 0.02em; margin-bottom: 3px; }
+  .step-card.prologue-card .step-name { color: #d4bc9a; }
+  .step-card .step-desc { font-size: 0.82rem; color: #c0c8d4; font-style: italic; line-height: 1.45; }
+  .step-card.prologue-card .step-desc { color: #a89880; }
+  .step-card .step-more { font-size: 0.72rem; color: #c9a84c; margin-top: 4px; opacity: 0.7; }
+  .step-card.prologue-card .step-more { color: #b5936a; }
+  .step-card.finale { border-color: #c9a84c44; background: rgba(201,168,76,0.08); }
   .step-card.finale .step-num { color: #e6d088; font-size: 1.5rem; }
 
   /* --- Footer --- */
-  .sidebar-footer {
-    text-align: center;
-    padding-top: 14px;
-    border-top: 1px solid #3a5068;
-    margin-top: 12px;
-    font-size: 0.82rem;
-    color: #8899aa;
-    letter-spacing: 0.04em;
-    flex-shrink: 0;
-  }
+  .sidebar-footer { text-align: center; padding-top: 14px; border-top: 1px solid #3a5068; margin-top: 12px; font-size: 0.82rem; color: #8899aa; letter-spacing: 0.04em; flex-shrink: 0; }
 
   /* --- Leaflet overrides --- */
   .leaflet-tooltip.permanent-label {
-    background: rgba(5,8,12,0.97);
-    border: 1.5px solid #6b8aaa;
-    border-radius: 10px;
-    color: #ffffff;
-    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-    font-size: 0.9rem;
-    font-weight: 500;
-    padding: 12px 16px;
-    box-shadow: 0 6px 24px rgba(0,0,0,0.8), 0 0 12px rgba(201,168,76,0.2);
-    white-space: normal;
-    max-width: 300px;
-    text-align: left;
-    pointer-events: auto;
-    line-height: 1.5;
+    background: rgba(5,8,12,0.97); border: 1.5px solid #6b8aaa; border-radius: 10px;
+    color: #fff; font-family: 'Segoe UI', Arial, sans-serif; font-size: 0.9rem; font-weight: 500;
+    padding: 12px 16px; box-shadow: 0 6px 24px rgba(0,0,0,0.8), 0 0 12px rgba(201,168,76,0.2);
+    white-space: normal; max-width: 300px; text-align: left; pointer-events: auto; line-height: 1.5;
   }
+  .leaflet-tooltip.permanent-label::before { border-top-color: #6b8aaa !important; }
+  .leaflet-tooltip.permanent-label .lbl-name { font-weight: 700; color: #ffe680; font-size: 0.95rem; display: block; margin-bottom: 5px; letter-spacing: 0.04em; }
+  .leaflet-tooltip.permanent-label.prologue-tip { border-color: #7a5a38; }
+  .leaflet-tooltip.permanent-label.prologue-tip .lbl-name { color: #d4a87a; }
+  .leaflet-tooltip.permanent-label .lbl-desc { color: #e8e8e8; font-size: 0.85rem; font-style: italic; line-height: 1.5; }
+  .leaflet-tooltip.permanent-label .lbl-more { display: block; margin-top: 6px; font-size: 0.78rem; color: #c9a84c; cursor: pointer; }
 
-  .leaflet-tooltip.permanent-label::before {
-    border-top-color: #6b8aaa !important;
-  }
-
-  .leaflet-tooltip.permanent-label .lbl-name {
-    font-weight: 700;
-    color: #ffe680;
-    font-size: 0.95rem;
-    display: block;
-    margin-bottom: 5px;
-    letter-spacing: 0.04em;
-    text-shadow: 0 0 8px rgba(255,230,128,0.35);
-  }
-
-  .leaflet-tooltip.permanent-label .lbl-desc {
-    color: #e8e8e8;
-    font-size: 0.85rem;
-    font-style: italic;
-    line-height: 1.5;
-  }
-
-  /* --- Custom marker style --- */
+  /* --- Custom markers --- */
   .custom-marker {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: #1a2a3a;
-    border: 2px solid #c9a84c;
-    color: #c9a84c;
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-    font-size: 0.7rem;
+    display: flex; align-items: center; justify-content: center;
+    width: 26px; height: 26px; border-radius: 50%;
+    background: #1a2a3a; border: 2px solid #c9a84c; color: #c9a84c;
+    font-family: 'Playfair Display', serif; font-weight: 700; font-size: 0.65rem;
     box-shadow: 0 0 10px rgba(201,168,76,0.4), 0 2px 8px rgba(0,0,0,0.5);
-    transition: transform 0.2s;
+    transition: transform 0.2s; cursor: pointer;
   }
-
   .custom-marker.finale {
-    background: #c9a84c;
-    color: #0d1117;
-    border-color: #e6d088;
-    width: 34px;
-    height: 34px;
-    font-size: 0.8rem;
+    background: #c9a84c; color: #0d1117; border-color: #e6d088;
+    width: 34px; height: 34px; font-size: 0.8rem;
     box-shadow: 0 0 18px rgba(201,168,76,0.7), 0 3px 10px rgba(0,0,0,0.6);
     animation: pulse 2s infinite;
+  }
+  .custom-marker.prologue-marker {
+    background: #1a140a; border: 2px dashed #b5936a; color: #c4a07a;
+    width: 24px; height: 24px; font-size: 0.6rem;
+    box-shadow: 0 0 6px rgba(181,147,106,0.3), 0 2px 6px rgba(0,0,0,0.5);
   }
 
   @keyframes pulse {
     0%, 100% { box-shadow: 0 0 10px rgba(201,168,76,0.4), 0 2px 8px rgba(0,0,0,0.5); }
-    50%      { box-shadow: 0 0 22px rgba(201,168,76,0.9), 0 3px 14px rgba(0,0,0,0.7); }
+    50%       { box-shadow: 0 0 22px rgba(201,168,76,0.9), 0 3px 14px rgba(0,0,0,0.7); }
   }
 
   /* --- Bouton toggle --- */
   #toggle-labels {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 1001;
-    background: rgba(10,14,20,0.9);
-    border: 1px solid #3a5068;
-    border-radius: 25px;
-    color: #c9a84c;
-    padding: 10px 18px;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 0.85rem;
-    cursor: pointer;
-    letter-spacing: 0.04em;
-    transition: all 0.25s;
-    backdrop-filter: blur(6px);
+    position: fixed; top: 20px; right: 20px; z-index: 1001;
+    background: rgba(10,14,20,0.9); border: 1px solid #3a5068; border-radius: 25px;
+    color: #c9a84c; padding: 10px 18px;
+    font-family: 'Cormorant Garamond', serif; font-size: 0.85rem;
+    cursor: pointer; letter-spacing: 0.04em; transition: all 0.25s; backdrop-filter: blur(6px);
   }
+  #toggle-labels:hover { background: rgba(30,40,54,0.95); border-color: #c9a84c; }
 
-  #toggle-labels:hover {
-    background: rgba(30,40,54,0.95);
-    border-color: #c9a84c;
+  /* ===== MODAL ===== */
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 2000;
+    display: flex; align-items: center; justify-content: center;
+    backdrop-filter: blur(4px); animation: fadeIn 0.2s ease;
   }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  .modal-box {
+    background: linear-gradient(160deg, #0f1924 0%, #111d2c 60%, #0c1620 100%);
+    border: 1.5px solid #3a5a78; border-radius: 16px;
+    width: min(660px, 92vw); max-height: 86vh;
+    overflow-y: auto; padding: 32px 36px 28px; position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.8), 0 0 30px rgba(201,168,76,0.12);
+    animation: slideUp 0.25s ease;
+  }
+  .modal-box.prologue-modal { border-color: #7a5a38; box-shadow: 0 20px 60px rgba(0,0,0,0.8), 0 0 20px rgba(181,147,106,0.1); }
+  .modal-box::-webkit-scrollbar { width: 5px; }
+  .modal-box::-webkit-scrollbar-thumb { background: #3a5068; border-radius: 3px; }
+  @keyframes slideUp { from { transform: translateY(24px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+  .modal-close { position: absolute; top: 16px; right: 18px; background: none; border: none; color: #8899aa; font-size: 1.2rem; cursor: pointer; padding: 4px 8px; border-radius: 6px; transition: color 0.2s, background 0.2s; font-family: sans-serif; }
+  .modal-close:hover { color: #ffe680; background: rgba(255,230,128,0.08); }
+
+  .modal-header { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 20px; padding-bottom: 18px; border-bottom: 1px solid #2a3f55; }
+  .modal-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: #c9a84c; min-width: 52px; text-align: center; line-height: 1; padding-top: 4px; }
+  .modal-num.prologue-num { color: #b5936a; font-size: 1.4rem; }
+  .modal-name { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 700; color: #ffe680; line-height: 1.2; margin-bottom: 6px; }
+  .modal-name.prologue-name { color: #d4bc9a; }
+  .modal-region-badge { display: inline-block; padding: 3px 12px; border-radius: 12px; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.05em; color: #fff; margin-bottom: 4px; }
+  .modal-dates { font-size: 0.88rem; color: #a0b8cc; font-style: italic; margin-top: 4px; }
+
+  .modal-summary { font-size: 1rem; color: #e0d8c0; line-height: 1.65; margin-bottom: 20px; padding: 14px 16px; background: rgba(201,168,76,0.06); border-left: 3px solid #c9a84c; border-radius: 0 8px 8px 0; }
+  .modal-summary.prologue-summary { border-left-color: #b5936a; background: rgba(181,147,106,0.06); }
+
+  .modal-details-text { font-size: 0.95rem; color: #c8d4e0; line-height: 1.75; }
+  .modal-details-text p { margin-bottom: 12px; }
+
+  /* Photos dans le modal */
+  .modal-photos { display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap; border-top: 1px solid #2a3f55; padding-top: 16px; }
+  .modal-photo-block { flex: 1; min-width: 140px; max-width: 300px; }
+  .modal-photo-block img { width: 100%; border-radius: 8px; border: 1px solid #3a5068; display: block; cursor: zoom-in; transition: transform 0.2s; }
+  .modal-photo-block img:hover { transform: scale(1.02); }
+  .modal-photo-caption { font-size: 0.73rem; color: #7a9ab0; font-style: italic; text-align: center; margin-top: 5px; line-height: 1.3; }
+
+  /* Lightbox simple pour les photos */
+  #lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 3000; display: none; align-items: center; justify-content: center; cursor: zoom-out; }
+  #lightbox img { max-width: 90vw; max-height: 90vh; border-radius: 8px; box-shadow: 0 0 40px rgba(0,0,0,0.8); }
 
   /* Responsive */
   @media (max-width: 768px) {
-    #sidebar {
-      width: 100%;
-      height: auto;
-      max-height: 40vh;
-      position: fixed;
-      bottom: 0;
-      top: auto;
-      border-right: none;
-      border-top: 2px solid #2c3e50;
-      border-radius: 16px 16px 0 0;
-      flex-direction: column;
-      padding: 16px 18px 10px;
-    }
+    #sidebar { width: 100%; height: auto; max-height: 40vh; position: fixed; bottom: 0; top: auto; border-right: none; border-top: 2px solid #2c3e50; border-radius: 16px 16px 0 0; padding: 16px 18px 10px; }
     .sidebar-header h1 { font-size: 1.1rem; }
     .steps-container { max-height: 150px; }
+    .modal-box { padding: 22px 20px 20px; }
+    .modal-num { font-size: 1.6rem; min-width: 40px; }
+    .modal-name { font-size: 1.1rem; }
   }
 </style>
 </head>
 <body>
 
 <div id="map"></div>
-
 <button id="toggle-labels" title="Afficher/Masquer les descriptions">📝 Étiquettes</button>
+
+<!-- LIGHTBOX -->
+<div id="lightbox"><img id="lightbox-img" src="" alt=""></div>
+
+<!-- MODAL DE DÉTAIL -->
+<div id="detail-modal" class="modal-overlay" style="display:none;" role="dialog" aria-modal="true">
+  <div class="modal-box" id="modal-box">
+    <button class="modal-close" id="modal-close" title="Fermer">✕</button>
+    <div class="modal-header">
+      <div class="modal-num" id="modal-num"></div>
+      <div>
+        <div class="modal-name" id="modal-name"></div>
+        <div id="modal-region-badge" class="modal-region-badge"></div>
+        <div class="modal-dates" id="modal-dates"></div>
+      </div>
+    </div>
+    <div class="modal-summary" id="modal-summary"></div>
+    <div class="modal-details-text" id="modal-details-text"></div>
+    <div class="modal-photos" id="modal-photos" style="display:none;"></div>
+  </div>
+</div>
 
 <div id="sidebar">
   <div class="sidebar-header">
     <div class="insigne">🎖️</div>
     <h1>Parcours Militaire<br>Alfred Marafico</h1>
     <div class="subtitle">12ᵉ RCA — 2ᵉ DB du Général Leclerc</div>
-    <div class="dates">4 mars 1943 — 24 novembre 1945</div>
+    <div class="dates">1940 — 1945</div>
   </div>
 
   <div class="legend-box">
-    <div class="legend-title">⏣ Étapes par région</div>
-    <div class="legend-item"><span class="legend-dot maroc"></span> Maroc</div>
+    <div class="legend-title">⏣ Étapes par période</div>
+    <div class="legend-item"><span class="legend-dot prologue-leg"></span> Avant-guerre · Vichy · Chantiers</div>
     <div class="legend-item"><span class="legend-dot algerie"></span> Algérie</div>
+    <div class="legend-item"><span class="legend-dot maroc"></span> Maroc</div>
     <div class="legend-item"><span class="legend-dot angleterre"></span> Angleterre</div>
     <div class="legend-item"><span class="legend-dot france"></span> France · Normandie & Paris</div>
     <div class="legend-item"><span class="legend-dot vosges"></span> Vosges · Lorraine</div>
-    <div class="legend-item"><span class="legend-dot alsace"></span> Alsace · Colmar</div>
-    <div class="legend-item"><span class="legend-dot atlantique"></span> Atlantique · Royan</div>
+    <div class="legend-item"><span class="legend-dot alsace"></span> Alsace</div>
+    <div class="legend-item"><span class="legend-dot atlantique"></span> Royan</div>
     <div class="legend-item"><span class="legend-dot allemagne"></span> Allemagne</div>
     <div class="legend-item"><span class="legend-dot tunisie"></span> Tunisie</div>
-    <div class="legend-item"><span class="legend-line track"></span> Trajet complet</div>
+    <div class="legend-item"><span class="legend-line prologue-track"></span> Trajet avant-guerre</div>
+    <div class="legend-item"><span class="legend-line track"></span> Campagne 1943–1945</div>
+    <div style="font-size:0.78rem; color:#8899aa; margin-top:10px; font-style:italic;">Cliquez sur une étape pour les détails.</div>
   </div>
 
-  <div class="steps-container" id="steps-list">
-    <!-- Rempli dynamiquement -->
-  </div>
+  <div class="steps-container" id="steps-list"></div>
 
   <div class="sidebar-footer">
-    En mémoire d'Alfred Marafico · 12ᵉ Régiment de Chasseurs d'Afrique · Division Leclerc
+    En mémoire d'Alfred Marafico · 12ᵉ RCA · 2ᵉ DB Leclerc
   </div>
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 // ============================================================
-// DONNÉES — 27 étapes du parcours
+// PROLOGUE — Avant le 12ᵉ RCA · 1940–1943
+// Couleur sépia/brun pour distinguer de la campagne principale
 // ============================================================
-const steps = [
-  { order: 1,  name: "Casablanca",        region: "Maroc",       desc: "4 mars 1943 — Arrivée au 12ᵉ RCA, 4ᵉ escadron.",                                               lat: 33.5731, lon: -7.5898, color: "#e74c3c" },
-  { order: 2,  name: "Témara",            region: "Maroc",       desc: "28 sept 1943 — Mouvement vers Témara.",                                                         lat: 33.9267, lon: -6.9076, color: "#e74c3c" },
-  { order: 3,  name: "Frontière algéro-marocaine", region: "Algérie", desc: "8 sept 1943 — Franchissement de la frontière.",                                        lat: 34.8230, lon: -1.7230, color: "#e67e22" },
-  { order: 4,  name: "Hassi Ben Okba",    region: "Algérie",     desc: "13 avril 1944 — Arrivée et bivouac près d'Oran.",                                              lat: 35.6833, lon: -0.4667, color: "#e67e22" },
-  { order: 5,  name: "Mers El Kébir",     region: "Algérie",     desc: "20 mai 1944 — Embarquement pour l'Angleterre.",                                                lat: 35.7270, lon: -0.7080, color: "#e67e22" },
-  { order: 6,  name: "Liverpool",         region: "Angleterre",  desc: "31 mai 1944 — Débarquement, mouvement vers Fimber (Yorkshire).",                               lat: 53.4084, lon: -2.9916, color: "#3498db" },
-  { order: 7,  name: "Fimber",            region: "Angleterre",  desc: "Juin–juillet 1944 — Bivouac de Fimber (Yorkshire).",                                           lat: 53.9620, lon: -0.6370, color: "#3498db" },
-  { order: 8,  name: "Bournemouth",       region: "Angleterre",  desc: "28 juillet 1944 — Mouvement de la 2ᵉ DB vers le sud.",                                          lat: 50.7192, lon: -1.8808, color: "#3498db" },
-  { order: 9,  name: "Weymouth",          region: "Angleterre",  desc: "29–31 juillet 1944 — Embarquement pour la France.",                                            lat: 50.6076, lon: -2.4535, color: "#3498db" },
-  { order: 10, name: "Utah Beach",        region: "Normandie",   desc: "28 août 1944 — Débarquement en Normandie. Banc de la Madeleine.",                              lat: 49.4134, lon: -1.1748, color: "#2ecc71" },
-  { order: 11, name: "Vesly",             region: "Normandie",   desc: "2–5 sept 1944 — Stationnement avant opérations (La Haye-du-Puits).",                            lat: 49.2854, lon: -1.4983, color: "#2ecc71" },
-  { order: 12, name: "Le Mans",           region: "Normandie",   desc: "9–11 août 1944 — Combats du Mans à Alençon. Campagne de Normandie.",                            lat: 48.0061, lon: 0.1996,  color: "#2ecc71" },
-  { order: 13, name: "Alençon",           region: "Normandie",   desc: "9–12 août 1944 — Bataille de la Forêt d'Écouves contre un train blindé allemand.",              lat: 48.4297, lon: 0.0919,  color: "#2ecc71" },
-  { order: 14, name: "Libération de Paris", region: "Paris",     desc: "24 août 1944 — Vallée de la Bièvre. Libération de Paris avec la 2ᵉ DB.",                         lat: 48.7960, lon: 2.3270,  color: "#2ecc71" },
-  { order: 15, name: "Dompaire",          region: "Vosges",      desc: "12–15 sept 1944 — Bataille de chars décisive. Brigade blindée allemande détruite.",             lat: 48.2219, lon: 6.3419,  color: "#9b59b6" },
-  { order: 16, name: "Vezouze & Blette",  region: "Lorraine",    desc: "31 oct–2 nov 1944 — Combats de la Vezouze et de la Blette.",                                    lat: 48.6711, lon: 6.8642,  color: "#9b59b6" },
-  { order: 17, name: "Sarre Blanche / Dabo", region: "Alsace",   desc: "19–21 nov 1944 — Combats dans la région de Dabo.",                                              lat: 48.6997, lon: 7.1981,  color: "#f39c12" },
-  { order: 18, name: "Strasbourg",        region: "Alsace",      desc: "23–25 nov 1944 — Libération de Strasbourg. Serment de Koufra accompli.",                        lat: 48.5839, lon: 7.7455,  color: "#f39c12" },
-  { order: 19, name: "Kilstett",          region: "Alsace",      desc: "22 janvier 1945 — Affaires de Kilstett.",                                                      lat: 48.8155, lon: 7.9928,  color: "#f39c12" },
-  { order: 20, name: "Neuf-Brisach",      region: "Alsace",      desc: "6–11 fév 1945 — Combats de la Poche de Colmar.",                                               lat: 48.0201, lon: 7.5295,  color: "#f39c12" },
-  { order: 21, name: "Royan",             region: "Atlantique",  desc: "14–17 avril 1945 — Réduction de la poche allemande de Royan.",                                  lat: 45.6230, lon: -1.0431, color: "#1abc9c" },
-  { order: 22, name: "Karlsruhe",         region: "Allemagne",   desc: "30 avril 1945 — Entrée en Allemagne. Campagne d'Allemagne avec la 2ᵉ DB.",                     lat: 49.0069, lon: 8.4037,  color: "#c0392b" },
-  { order: 23, name: "Paris (Retour)",    region: "Paris",       desc: "30 mai 1945 — La 2ᵉ DB stationne en région parisienne.",                                       lat: 48.8566, lon: 2.3522,  color: "#2ecc71" },
-  { order: 24, name: "Nemours",           region: "Île-de-France", desc: "3 juin 1945 — Cantonnement à Nemours (Seine-et-Marne).",                                     lat: 48.2683, lon: 2.6933,  color: "#2ecc71" },
-  { order: 25, name: "Toulon",            region: "Provence",    desc: "11 août 1945 — Embarquement pour la Tunisie.",                                                 lat: 43.1242, lon: 5.9280,  color: "#2ecc71" },
-  { order: 26, name: "Tunis",             region: "Tunisie",     desc: "13 août 1945 — Débarquement à Tunis.",                                                         lat: 36.8065, lon: 10.1815, color: "#f1c40f" },
-  { order: 27, name: "Metlaoui",          region: "Tunisie",     desc: "24 nov 1945 — Démobilisé. Se retire à Metlaoui (Gafsa). ✦ FIN DU PARCOURS ✦",                 lat: 34.3870, lon: 8.4040,  color: "#f1c40f", finale: true }
+const PROLOGUE_COLOR = "#b5936a";
+
+const prologue = [
+  {
+    id: "P1",
+    name: "Metlaoui",
+    region: "Tunisie",
+    dates: "Juin 1940",
+    desc: "Juin 1940 — Alfred, 20 ans, épicier, est appelé sous les drapeaux.",
+    details: [
+      "Alfred Marafico naît le 9 janvier 1920 à Metlaoui, petite ville minière de phosphates du sud tunisien, fils d'immigrés italiens. En 1940, il est épicier, avec un niveau d'instruction minimal (niveau 1 : sait lire et écrire). Il est inscrit sous le n°12 de la liste du canton de Gafsa, dans la première partie — les conscrits prioritaires.",
+      "En juin 1940, alors que la France s'effondre face à l'Allemagne, il est appelé sous les drapeaux. C'est le début d'un parcours qui le mènera de la Tunisie jusqu'aux frontières de l'Allemagne."
+    ],
+    lat: 34.387, lon: 8.404,
+    photos: []
+  },
+  {
+    id: "P2",
+    name: "Constantine — Dépôt d'Infanterie d'Afrique n°3",
+    region: "Algérie",
+    dates: "13–17 juin 1940",
+    desc: "13 juin 1940 — Affecté au Dépôt d'Infanterie d'Afrique n°3 · 3ᵉ Régiment de Zouaves.",
+    details: [
+      "Alfred est affecté au Dépôt d'Infanterie d'Afrique n°3 le 13 juin 1940. Il arrive officiellement au corps le 17 juin à Constantine, en Algérie, au dépôt du 3ᵉ Régiment de Zouaves. Ses services sont comptés rétroactivement à partir du 8 juin.",
+      "Ces dépôts jouent un rôle administratif et logistique : on y enregistre les conscrits, vérifie leur état de santé, distribue uniformes et équipement. Pour des raisons administratives, Alfred est rattaché sur le papier au 3ᵉ puis au 23ᵉ régiment, sans être engagé en unité de combat. C'est le moment où le jeune épicier de Metlaoui commence à devenir soldat — précisément le jour où Pétain demande l'armistice."
+    ],
+    lat: 36.365, lon: 6.615,
+    photos: []
+  },
+  {
+    id: "P3",
+    name: "Tabarka — Chantier de Jeunesse 105 « Saint-Louis »",
+    region: "Tunisie",
+    dates: "24 octobre 1940 – janvier 1941",
+    desc: "24 oct. 1940 — Incorporé au Groupement n°105 « Saint-Louis » à Tabarka. Devise : « Un pour tous et tous pour un ».",
+    details: [
+      "Le 25 septembre 1940, Alfred est affecté à un camp de jeunesse par note de service n°2788 de la 9ᵉ région militaire. Relevé du centre le 16 octobre, il est incorporé aux Chantiers de Jeunesse 105 le 24 octobre 1940. Ce groupement, créé le 15 octobre 1940, porte le nom de « Saint-Louis » et est basé à Tabarka, sur la côte nord de la Tunisie.",
+      "Sous Vichy, le service militaire est remplacé par ces Chantiers : travaux d'infrastructure, discipline, formation morale. Ce ne sont pas des unités combattantes. La devise du Groupement 105 est « Un pour tous et tous pour un ». Le groupement publie un journal interne appelé « Résurrection ».",
+      "Alfred y reste quelques mois. En janvier 1941, il est libéré et se retire à Metlaoui, reprenant vraisemblablement son métier d'épicier."
+    ],
+    lat: 36.955, lon: 8.758,
+    photos: [
+      { src: "Images/Ecussion_Chantier_Jeunesse105.jpg", caption: "Écusson du Groupement n°105 « Saint-Louis »" },
+      { src: "Images/Chantier_Jeunesse_015.jpg", caption: "Jeunes au Chantier de Jeunesse, 1940–1941" }
+    ]
+  },
+  {
+    id: "P4",
+    name: "Metlaoui — Retour civil",
+    region: "Tunisie",
+    dates: "Janvier 1941 – 10 février 1943",
+    desc: "Janv. 1941 – fév. 1943 — Deux ans de vie civile à Metlaoui. Épicier.",
+    details: [
+      "Alfred rentre à Metlaoui après sa libération du Chantier 105 et reprend sa vie civile pendant deux ans. La Tunisie est sous contrôle de Vichy, l'armée française réduite à sa plus simple expression, l'armement contrôlé par les commissions d'armistice germano-italiennes.",
+      "Pendant ce temps, en novembre 1942, l'Opération Torch débarque les Alliés en Afrique du Nord. La Tunisie bascule dans le camp allié. La campagne de Tunisie (fin 1942 – mai 1943) mobilise d'urgence les jeunes hommes disponibles. Le 10 février 1943, Alfred est rappelé au Chantier 105."
+    ],
+    lat: 34.387, lon: 8.404,
+    photos: []
+  },
+  {
+    id: "P5",
+    name: "Tabarka — Chantier 105 (rappelé)",
+    region: "Tunisie",
+    dates: "10 – 27 février 1943",
+    desc: "10 fév. 1943 — Rappelé au Chantier 105. Antichambre vers le 12ᵉ RCA.",
+    details: [
+      "Le 10 février 1943, Alfred est rappelé au Chantier 105 à Tabarka. Cette fois, l'enjeu est tout autre : les Chantiers de Jeunesse, initialement civils, deviennent des centres de mobilisation d'urgence pour alimenter les unités combattantes qui se reforment dans le sillage de l'Opération Torch.",
+      "Quelques semaines plus tard, le 27 février 1943, Alfred est versé au 12ᵉ Régiment de Chasseurs d'Afrique. Il arrive au régiment le 4 mars 1943 à Hammam-Bou-Hadjar, en Algérie — le début de sa vraie carrière militaire."
+    ],
+    lat: 36.958, lon: 8.760,
+    photos: [
+      { src: "Images/Ecussion_Chantier_Jeunesse105.jpg", caption: "Écusson du Groupement n°105 « Saint-Louis »" }
+    ]
+  }
 ];
 
 // ============================================================
-// CARTE — Initialisation
+// CAMPAGNE — 27 étapes du parcours avec le 12ᵉ RCA / 2ᵉ DB
 // ============================================================
-const map = L.map('map', {
-  center: [44.0, 2.5],
-  zoom: 5,
-  zoomControl: false,
-  attributionControl: false
-});
+const steps = [
+  {
+    order: 1, name: "Hammam-Bou-Hadjar", region: "Algérie",
+    dates: "4 mars 1943",
+    desc: "4 mars 1943 — Arrivée au 12ᵉ RCA. 4ᵉ escadron (Cne PICQUART, puis HARGOUS). Peloton d'éclaireurs.",
+    details: [
+      "Alfred arrive au 12ᵉ Régiment de Chasseurs d'Afrique le 4 mars 1943, placé au 4ᵉ escadron commandé par le capitaine PICQUART, bientôt remplacé par le capitaine HARGOUS. Le 4ᵉ escadron fait partie du 2ᵉ groupe (chef d'escadrons de FÜRST), stationné à Hammam-Bou-Hadjar, à quelques kilomètres de la Méditerranée et à environ 80 km de la frontière marocaine.",
+      "D'après la transmission familiale et une photo conservée, Alfred fait partie du peloton d'éclaireurs du 4ᵉ escadron — des soldats en Jeep qui partaient en reconnaissance en avant des chars Sherman, parfois à pied, pour sécuriser les itinéraires. Ce rôle, qui impliquait de marcher à proximité des blindés, correspond à la mémoire familiale selon laquelle il « marchait à côté du char ».",
+      "Alfred prend une permission exceptionnelle le 13 juin 1943 et rentre le 19 juillet 1943. C'est à cette époque que de LANGLADE rencontre LECLERC à Alger et décide d'intégrer le 12ᵉ RCA dans la 2ᵉ DB en formation."
+    ],
+    lat: 35.3667, lon: -0.9500, color: "#e67e22",
+    photos: [
+      { src: "Images/Peloton_eclaireurs_Alfred_Dans_Jeep.jpg", caption: "Alfred (à droite) avec le peloton d'éclaireurs du 4ᵉ escadron" }
+    ]
+  },
+  {
+    order: 2, name: "Frontière algéro-marocaine", region: "Algérie / Maroc",
+    dates: "8 septembre 1943",
+    desc: "8 sept. 1943 — Franchissement de la frontière vers le Maroc.",
+    details: [
+      "Alfred franchit la frontière algéro-marocaine le 8 septembre 1943. Le 12ᵉ RCA quitte Boufarik et l'Algérie le 16 septembre par chemin de fer pour rejoindre le Maroc, où l'attend le nouveau matériel américain sorti des chaînes de montage de Casablanca."
+    ],
+    lat: 34.823, lon: -1.723, color: "#e67e22", photos: []
+  },
+  {
+    order: 3, name: "Casablanca", region: "Maroc",
+    dates: "20 septembre 1943",
+    desc: "20 sept. 1943 — Présent à Casablanca. Perception des chars Sherman américains.",
+    details: [
+      "Alfred est présent à Casablanca le 20 septembre 1943. Le régiment y perçoit les tout nouveaux chars Sherman américains qui remplacent les vieux Somua S35. Par tradition, les chasseurs retirent les plaquettes métalliques « SOMUA » de leurs anciens chars et les soudent à l'avant des Sherman — souvenir et porte-bonheur."
+    ],
+    lat: 33.5731, lon: -7.5898, color: "#e74c3c", photos: []
+  },
+  {
+    order: 4, name: "Témara — Forêt", region: "Maroc",
+    dates: "28 septembre 1943 – avril 1944",
+    desc: "28 sept. 1943 — Instruction intensive sur chars Sherman en forêt de Témara (7 km sud de Rabat).",
+    details: [
+      "Alfred rejoint le cantonnement en forêt de Témara, à 7 km au sud de Rabat, en bordure de l'Atlantique. Le 12ᵉ RCA y perfectionne son instruction sur le matériel américain sous la direction du chef d'escadrons de FÜRST. Les Somua S35 sont reversés à d'autres unités.",
+      "L'instruction est intensive : préparation physique, tir au canon Sherman, procédures radio, reconnaissance d'aéronefs, et l'obligation pour chaque chasseur d'être habilité à conduire une Jeep. En juillet 1943, le général LECLERC convoque au cinéma de Rio-Salado tous les officiers et sous-officiers pour leur annoncer sa conviction en la victoire finale.",
+      "Alfred est promu au grade de 1ʳᵉ classe le 1ᵉʳ mars 1944."
+    ],
+    lat: 33.9267, lon: -6.9076, color: "#e74c3c",
+    photos: [
+      { src: "Images/Carte_Camp_Temara.jpg", caption: "Plan manuscrit du camp de Témara — le 4ᵉ escadron est en bas à droite" },
+      { src: "Images/Foret_Temara_2026.jpg", caption: "La forêt de Témara aujourd'hui — les allées d'eucalyptus sont celles qu'Alfred a connues" }
+    ]
+  },
+  {
+    order: 5, name: "Hassi Ben Okba", region: "Algérie",
+    dates: "13 avril 1944",
+    desc: "13 avril 1944 — Retour en Algérie. Bivouac près d'Oran.",
+    details: [
+      "Alfred quitte le Maroc le 11 avril 1944, franchit la frontière algéro-marocaine le 13 et arrive à Hassi Ben Okba le même jour pour y bivouaquer. Cette zone près d'Oran sert de point de regroupement avant l'embarquement pour l'Angleterre."
+    ],
+    lat: 35.6833, lon: -0.4667, color: "#e67e22", photos: []
+  },
+  {
+    order: 6, name: "Mers El Kébir", region: "Algérie",
+    dates: "20 mai 1944",
+    desc: "20 mai 1944 — Embarquement pour l'Angleterre.",
+    details: [
+      "Le 20 mai 1944, Alfred embarque à Mers El Kébir, le grand port militaire d'Oran, à destination de l'Angleterre sur le s/s 'Capitaine Castle'. La traversée dure une dizaine de jours."
+    ],
+    lat: 35.7270, lon: -0.7080, color: "#e67e22", photos: []
+  },
+  {
+    order: 7, name: "Liverpool", region: "Angleterre",
+    dates: "31 mai 1944",
+    desc: "31 mai 1944 — Débarquement en Angleterre. Mouvement vers le Yorkshire.",
+    details: [
+      "Alfred débarque à Liverpool le 31 mai 1944. Le régiment traverse ensuite l'Angleterre vers l'est pour rejoindre Fimber Station dans le Yorkshire, non loin de Hull."
+    ],
+    lat: 53.4084, lon: -2.9916, color: "#3498db", photos: []
+  },
+  {
+    order: 8, name: "Fimber Station", region: "Angleterre",
+    dates: "Juin – juillet 1944",
+    desc: "Juin–juillet 1944 — Camp d'instruction dans le Yorkshire (Hull). Photo du 4ᵉ escadron au château de Sunderlandwick.",
+    details: [
+      "Fimber Station est un camp de toile dans un vallon du East Yorkshire, à quelques kilomètres de Hull. Tentes non chauffées, mais intendance américaine généreuse. Le samedi soir, les permissionnaires vont au dancing ou dans les pubs de Hull.",
+      "Manœuvres grandeur nature avec des unités américaines, anglaises, polonaises et tchécoslovaques. Tir au canon Sherman deux fois par semaine — traversée de Hull avec les chars sous les applaudissements des badauds. Le 28 juin, le général PATTON inspecte le camp en culotte de cheval et bottes à éperons.",
+      "Le 6 juin 1944, le débarquement allié en Normandie est annoncé. La 2ᵉ DB se prépare à partir."
+    ],
+    lat: 53.9620, lon: -0.6370, color: "#3498db",
+    photos: [
+      { src: "Images/4eme_escadron_parc du château de Sunderlandwick.jpg", caption: "Le 4ᵉ escadron du 12ᵉ RCA au parc du château de Sunderlandwick, Yorkshire, été 1944 — Alfred est parmi ces hommes" }
+    ]
+  },
+  {
+    order: 9, name: "Bournemouth", region: "Angleterre",
+    dates: "28 juillet 1944",
+    desc: "28 juillet 1944 — Mouvement de la 2ᵉ DB vers le sud de l'Angleterre.",
+    details: [
+      "Le 28 juillet 1944, la 2ᵉ DB fait mouvement vers Bournemouth, sur la côte sud. Alfred y arrive le même jour. Avant-dernière étape avant l'embarquement pour la France."
+    ],
+    lat: 50.7192, lon: -1.8808, color: "#3498db", photos: []
+  },
+  {
+    order: 10, name: "Weymouth", region: "Angleterre",
+    dates: "29–31 juillet 1944",
+    desc: "29–31 juillet 1944 — Embarquement pour la France.",
+    details: [
+      "Alfred quitte Bournemouth le 29, arrive à Weymouth le 30, embarque le 31 juillet à destination de la France. Au large, la mer est très agitée. La traversée de la Manche est éprouvante."
+    ],
+    lat: 50.6076, lon: -2.4535, color: "#3498db", photos: []
+  },
+  {
+    order: 11, name: "Utah Beach — Banc de la Madeleine", region: "Normandie",
+    dates: "1ᵉʳ–2 août 1944",
+    desc: "1ᵉʳ août 1944 — Débarquement en Normandie, face au hameau de la Madeleine.",
+    details: [
+      "Le 1ᵉʳ août 1944, à partir de 0 h 30, les LST et LCT déversent sur Utah Beach, près de Sainte-Marie-du-Mont, leurs hommes et engins. Le premier geste de chacun : se baisser pour ramasser une poignée de sable normand qu'ils laissent couler entre leurs doigts. À 11 heures, le général LECLERC donne ses premiers ordres sur le sol français.",
+      "Le Groupement Tactique Langlade, tous feux éteints en colonne, rejoint son point de rassemblement près de Saint-Germain-de-Varréville, qu'il atteint le 2 août vers 2 heures du matin. La 2ᵉ DB est intégrée dans la 3ᵉ Armée américaine du général PATTON."
+    ],
+    lat: 49.4134, lon: -1.1748, color: "#2ecc71",
+    photos: [
+      { src: "Images/Debarquement_Normandie_Sherman_3emeEscadron.jpg", caption: "Un Sherman du 12ᵉ RCA sort d'un LST en Normandie — on distingue la plaque « SOMUA » soudée sur le flanc, tradition des chasseurs" }
+    ]
+  },
+  {
+    order: 12, name: "Vesly", region: "Normandie",
+    dates: "2–5 août 1944",
+    desc: "2–5 août 1944 — Stationnement avant opérations (La Haye-du-Puits).",
+    details: [
+      "Alfred stationne à Vesly, près de La Haye-du-Puits, du 2 au 5 août. Le groupement se prépare à entrer dans la zone des opérations pour la campagne de Normandie."
+    ],
+    lat: 49.2854, lon: -1.4983, color: "#2ecc71", photos: []
+  },
+  {
+    order: 13, name: "Le Mans → Alençon", region: "Normandie",
+    dates: "9–11 août 1944",
+    desc: "9–11 août 1944 — Combats du Mans à Alençon. Campagne de Normandie (7–22 août).",
+    details: [
+      "Alfred participe aux combats du Mans à Alençon du 9 au 11 août 1944. La mission est de couper l'axe Falaise-Argentan-Alençon, tenu par la 9ᵉ Panzerdivision allemande. Le 10 août, le Groupement Langlade est divisé en deux sous-groupements. Le Sous-Groupement MINJONNET conserve les 3ᵉ et 4ᵉ escadrons — celui d'Alfred.",
+      "Le 12 août, le Sous-Groupement traverse Alençon déjà libérée et bivouaque à la sortie nord, sous les bombardements de l'aviation allemande."
+    ],
+    lat: 48.250, lon: 0.100, color: "#2ecc71",
+    photos: [
+      { src: "Images/Char_Sherman_Reconstitution.jpg", caption: "Sherman M4 du type utilisé par le 12ᵉ RCA lors de la campagne de Normandie (photo de reconstitution)" }
+    ]
+  },
+  {
+    order: 14, name: "Paris — Vallée de la Bièvre", region: "Île-de-France",
+    dates: "23 août – 7 septembre 1944",
+    desc: "24 août 1944 — Combats de la Vallée de la Bièvre. Bataille de Paris.",
+    details: [
+      "Alfred participe à la bataille de Paris du 23 août au 7 septembre 1944. Le 24 août, il prend part aux combats de la Vallée de la Bièvre, dans les faubourgs sud de Paris.",
+      "Après la libération, le Sous-Groupement fait relâche à Villetaneuse et Montmagny pour entretenir les véhicules. Des permissions de 24 heures permettent aux soldats de se rendre à Paris. LECLERC obtient des Américains l'accord de continuer vers l'est, vers Strasbourg."
+    ],
+    lat: 48.7960, lon: 2.3270, color: "#2ecc71", photos: []
+  },
+  {
+    order: 15, name: "Dompaire", region: "Vosges",
+    dates: "12–15 septembre 1944",
+    desc: "12–15 sept. 1944 — Bataille de Dompaire. La 112ᵉ Brigade blindée allemande est détruite.",
+    details: [
+      "Alfred participe à la bataille de Dompaire du 12 au 15 septembre 1944. Le 13 septembre au matin, le bivouac est violemment bombardé par des automoteurs allemands. Le 4ᵉ escadron — l'escadron d'Alfred — est touché : le MDL/Chef Yves FERRAND et le Chasseur Robert GARNICHAT sont tués à bord du Sherman « SANCERROIS », deux autres camarades grièvement blessés.",
+      "Malgré ces pertes, la bataille est une victoire éclatante : la 112ᵉ Brigade blindée allemande est détruite par le 12ᵉ RCA. Le 15 août, quatre nouveaux Sherman avaient été baptisés pour remplacer les pertes de Normandie : « S/LT D'ARCANGUES », « LT ZAGRODSKI », « BORDELAIS II » et « ARMAGNAC II »."
+    ],
+    lat: 48.2219, lon: 6.3419, color: "#9b59b6", photos: []
+  },
+  {
+    order: 16, name: "Vezouze & Blette", region: "Lorraine",
+    dates: "31 octobre – 2 novembre 1944",
+    desc: "31 oct.–2 nov. 1944 — Combats de la Vezouze et de la Blette.",
+    details: [
+      "Alfred prend part aux combats de la Vezouze et de la Blette du 31 octobre au 2 novembre 1944, dans le cadre de la campagne des Vosges (8 septembre – 11 novembre 1944). Ces combats en Lorraine ouvrent la route vers les Vosges alsaciennes et Strasbourg."
+    ],
+    lat: 48.590, lon: 6.790, color: "#9b59b6", photos: []
+  },
+  {
+    order: 17, name: "Sarre Blanche / Dabo", region: "Alsace",
+    dates: "19–21 novembre 1944",
+    desc: "19–21 nov. 1944 — Combats de la Sarre Blanche, Sarre Rouge et Dabo.",
+    details: [
+      "Alfred participe aux combats de la Sarre Blanche, de la Sarre Rouge et de Dabo du 19 au 21 novembre 1944. Ces combats dans les cols des Vosges alsaciennes ouvrent la route vers Strasbourg, dans le cadre de la campagne d'Alsace (12 novembre 1944 – 1ᵉʳ mars 1945)."
+    ],
+    lat: 48.6997, lon: 7.1981, color: "#f39c12", photos: []
+  },
+  {
+    order: 18, name: "Strasbourg", region: "Alsace",
+    dates: "23–25 novembre 1944",
+    desc: "23–25 nov. 1944 — Libération de Strasbourg. Le Serment de Koufra est tenu.",
+    details: [
+      "Le Sous-Groupement MINJONNET, avec le 12ᵉ RCA, entre dans Strasbourg le 24 novembre 1944 à 14 heures. La ville est intacte et animée, les tramways circulent normalement. C'est l'accomplissement du Serment de Koufra : LECLERC avait promis depuis le Tchad en 1941 de ne déposer les armes qu'après avoir arboré le tricolore sur la cathédrale de Strasbourg.",
+      "Le 24 décembre, les habitants envoient de très nombreux colis de Noël aux soldats. La messe de minuit se célèbre dans une cave à −13°C, avec des cantiques en alsacien."
+    ],
+    lat: 48.5839, lon: 7.7455, color: "#f39c12", photos: []
+  },
+  {
+    order: 19, name: "Kilstett", region: "Alsace",
+    dates: "22 janvier 1945",
+    desc: "22 janv. 1945 — Combat de Kilstett. Le 4ᵉ escadron (4/12ᵉ RCA) est engagé.",
+    details: [
+      "Alfred participe au combat de Kilstett le 22 janvier 1945, au nord de Strasbourg, dans le cadre des opérations contre l'Opération Nordwind allemande. La carte tactique du combat montre explicitement le « 4/12° RCA » (4ᵉ escadron du 12ᵉ RCA) comme l'un des deux groupes d'assaut principaux, au sein du Groupe Fondé-Baillou. Le 3ᵉ Bataillon du 3ᵉ RTA est encerclé à Kilstett et le 4ᵉ escadron participe à le dégager."
+    ],
+    lat: 48.8155, lon: 7.9928, color: "#f39c12",
+    photos: [
+      { src: "Images/Carte_Combat_Kilstett.jpg", caption: "Carte tactique du combat de Kilstett, 22 janvier 1945 — le « 4/12° RCA » (escadron d'Alfred) est indiqué à gauche comme groupe d'assaut" }
+    ]
+  },
+  {
+    order: 20, name: "Neuf-Brisach", region: "Alsace",
+    dates: "6–11 février 1945",
+    desc: "6–11 fév. 1945 — Combats de la Poche de Colmar.",
+    details: [
+      "Alfred participe aux combats de Neuf-Brisach du 6 au 11 février 1945, lors de la réduction de la Poche de Colmar — les derniers engagements majeurs du 12ᵉ RCA en Alsace, avant un retour en zone intérieure (2 mars – 9 avril 1945)."
+    ],
+    lat: 48.0201, lon: 7.5295, color: "#f39c12", photos: []
+  },
+  {
+    order: 21, name: "Royan", region: "Atlantique",
+    dates: "14–17 avril 1945",
+    desc: "14–17 avril 1945 — Réduction de la poche de Royan. Le Sherman « D'ARCANGUES » du 4ᵉ escadron est engagé.",
+    details: [
+      "Alfred participe aux opérations du Front de Royan du 14 au 17 avril 1945. Depuis septembre 1944, une poche allemande d'environ 15 000 hommes tient Royan. Le Sherman « D'ARCANGUES » du 4ᵉ escadron — l'escadron d'Alfred — est engagé dans ces combats. Le 14 avril, deux chasseurs du 4ᵉ escadron (sur les chars « MEDOC II » et « SANCERROIS ») sont blessés en introduisant un obus.",
+      "Alfred quitte la zone de Royan le 28 avril et fait mouvement vers le Front de l'Est."
+    ],
+    lat: 45.6230, lon: -1.0431, color: "#1abc9c", photos: []
+  },
+  {
+    order: 22, name: "Frontière allemande", region: "Allemagne",
+    dates: "30 avril – 26 mai 1945",
+    desc: "30 avril 1945 — Franchissement de la frontière. Campagne d'Allemagne avec la 2ᵉ DB.",
+    details: [
+      "Alfred franchit la frontière allemande le 30 avril 1945 et participe à la campagne d'Allemagne avec la 2ᵉ DB, entrant depuis l'Alsace en traversant le Rhin.",
+      "La 2ᵉ DB fait mouvement vers la France le 24 mai 1945. Alfred franchit à nouveau la frontière le 26 mai et passe dans la zone intérieure française le même jour."
+    ],
+    lat: 48.040, lon: 7.620, color: "#c0392b", photos: []
+  },
+  {
+    order: 23, name: "Paris (Retour)", region: "Île-de-France",
+    dates: "30 mai 1945",
+    desc: "30 mai 1945 — La 2ᵉ DB stationne en région parisienne.",
+    details: [
+      "Après la fin des combats, la 2ᵉ DB stationne en région parisienne à partir du 30 mai 1945. Alfred est mis à disposition du général commandant la 19ᵉ Région (AM N°141/C/FFF du 3 août 1945)."
+    ],
+    lat: 48.8566, lon: 2.3522, color: "#2ecc71", photos: []
+  },
+  {
+    order: 24, name: "Nemours", region: "Île-de-France",
+    dates: "3 juin 1945",
+    desc: "3 juin 1945 — Cantonnement à Nemours (Seine-et-Marne).",
+    details: [
+      "Alfred cantonne avec son unité à Nemours le 3 juin 1945, en attendant le rapatriement vers la Tunisie."
+    ],
+    lat: 48.2683, lon: 2.6933, color: "#2ecc71", photos: []
+  },
+  {
+    order: 25, name: "Toulon", region: "Provence",
+    dates: "11 août 1945",
+    desc: "11 août 1945 — Embarquement pour la Tunisie.",
+    details: [
+      "Alfred embarque à Toulon le 11 août 1945 à destination de la Tunisie. Il rentre au pays après plus de deux ans de campagnes militaires — de la Normandie à l'Alsace, de Royan à l'Allemagne."
+    ],
+    lat: 43.1242, lon: 5.9280, color: "#2ecc71", photos: []
+  },
+  {
+    order: 26, name: "Tunis", region: "Tunisie",
+    dates: "13 août – 23 novembre 1945",
+    desc: "13 août 1945 — Débarquement à Tunis. Démobilisation le 23 novembre 1945.",
+    details: [
+      "Alfred débarque à Tunis le 13 août 1945. Il est démobilisé par le G.T.T. de Tunis le 23 novembre 1945 et relevé des contrôles le 24 novembre."
+    ],
+    lat: 36.8065, lon: 10.1815, color: "#f1c40f", photos: []
+  },
+  {
+    order: 27, name: "Metlaoui", region: "Tunisie",
+    dates: "24 novembre 1945",
+    desc: "24 nov. 1945 — Démobilisé. Retour à Metlaoui. ✦ FIN DU PARCOURS ✦",
+    details: [
+      "Alfred est démobilisé et se retire à Metlaoui, sa ville natale, le 24 novembre 1945. Il retrouve son métier d'épicier dans cette ville minière de phosphates où il est né le 9 janvier 1920.",
+      "Il sera rappelé une dernière fois le 24 juin 1952, en raison de la situation en Tunisie, rejoignant la Légion de la gendarmerie. Il est renvoyé dans ses foyers le 14 juillet 1952. En 1959, il change de domicile et est rattaché au recrutement de Marseille comme résidant à Moulares (Tunisie). Réintégré à son recrutement d'origine le 15 juillet 1964."
+    ],
+    lat: 34.3870, lon: 8.4040, color: "#f1c40f", finale: true, photos: []
+  }
+];
 
-// Fond de carte sombre élégant (CartoDB Dark Matter)
-L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-  maxZoom: 19,
-  subdomains: 'abcd'
-}).addTo(map);
-
-// Contrôle zoom discret
+// ============================================================
+// CARTE
+// ============================================================
+const map = L.map('map', { center: [40, 5], zoom: 4, zoomControl: false, attributionControl: false });
+L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { maxZoom: 19, subdomains: 'abcd' }).addTo(map);
 L.control.zoom({ position: 'bottomright' }).addTo(map);
-
-// Attribution discrète
 L.control.attribution({ position: 'bottomleft', prefix: '' }).addTo(map);
 
-// ============================================================
-// TRACÉ — Ligne du parcours complet
-// ============================================================
-const trackCoords = steps.map(s => [s.lat, s.lon]);
+// Tracé prologue (sépia, tirets)
+const prologueCoords = prologue.map(p => [p.lat, p.lon]);
+// Ajouter la connexion vers la première étape principale
+prologueCoords.push([steps[0].lat, steps[0].lon]);
 
-const trackLine = L.polyline(trackCoords, {
-  color: '#c9a84c',
-  weight: 3,
-  opacity: 0.75,
-  dashArray: '8 4',
-  lineCap: 'round',
-  lineJoin: 'round',
-  className: 'parcours-track'
-}).addTo(map);
+L.polyline(prologueCoords, { color: PROLOGUE_COLOR, weight: 6, opacity: 0.12, lineCap: 'round' }).addTo(map);
+L.polyline(prologueCoords, { color: PROLOGUE_COLOR, weight: 2, opacity: 0.55, dashArray: '5 6', lineCap: 'round' }).addTo(map);
 
-// Effet de lueur sous la ligne
-const trackGlow = L.polyline(trackCoords, {
-  color: '#c9a84c',
-  weight: 8,
-  opacity: 0.18,
-  lineCap: 'round',
-  lineJoin: 'round'
-}).addTo(map);
+// Tracé campagne principale (doré)
+const campaignCoords = steps.map(s => [s.lat, s.lon]);
+L.polyline(campaignCoords, { color: '#c9a84c', weight: 8, opacity: 0.18, lineCap: 'round' }).addTo(map);
+L.polyline(campaignCoords, { color: '#c9a84c', weight: 3, opacity: 0.75, dashArray: '8 4', lineCap: 'round' }).addTo(map);
 
 // ============================================================
-// MARQUEURS + ÉTIQUETTES PERMANENTES
+// MODAL
 // ============================================================
-const markers = [];
-const labels = [];
-let labelsVisible = true;
+const modal        = document.getElementById('detail-modal');
+const modalBox     = document.getElementById('modal-box');
+const modalNum     = document.getElementById('modal-num');
+const modalName    = document.getElementById('modal-name');
+const modalBadge   = document.getElementById('modal-region-badge');
+const modalDates   = document.getElementById('modal-dates');
+const modalSummary = document.getElementById('modal-summary');
+const modalDetails = document.getElementById('modal-details-text');
+const modalPhotos  = document.getElementById('modal-photos');
 
-steps.forEach((step, index) => {
-  // Icône personnalisée en HTML
-  const iconSize = step.finale ? 34 : 26;
-  const iconHtml = `<div class="custom-marker${step.finale ? ' finale' : ''}" style="border-color:${step.color}; color:${step.finale ? '#0d1117' : step.color};${step.finale ? 'background:'+step.color+';' : ''}">${step.order}</div>`;
+function openModal(item, isPrologue) {
+  const id     = isPrologue ? item.id : item.order;
+  const color  = isPrologue ? PROLOGUE_COLOR : item.color;
 
-  const icon = L.divIcon({
-    html: iconHtml,
-    className: '',
-    iconSize: [iconSize, iconSize],
-    iconAnchor: [iconSize/2, iconSize/2]
-  });
+  modalNum.textContent  = id;
+  modalNum.className    = 'modal-num' + (isPrologue ? ' prologue-num' : '');
+  modalName.textContent = item.name;
+  modalName.className   = 'modal-name' + (isPrologue ? ' prologue-name' : '');
+  modalBadge.textContent = item.region;
+  modalBadge.style.background = color + 'cc';
+  modalDates.textContent  = item.dates;
+  modalSummary.textContent = item.desc;
+  modalSummary.className   = 'modal-summary' + (isPrologue ? ' prologue-summary' : '');
+  modalDetails.innerHTML   = item.details.map(p => `<p>${p}</p>`).join('');
+  modalBox.className       = 'modal-box' + (isPrologue ? ' prologue-modal' : '');
 
-  const marker = L.marker([step.lat, step.lon], { icon }).addTo(map);
-  markers.push(marker);
+  // Photos
+  if (item.photos && item.photos.length > 0) {
+    modalPhotos.innerHTML = item.photos.map(ph =>
+      `<div class="modal-photo-block">
+        <img src="${ph.src}" alt="${ph.caption}" onclick="openLightbox('${ph.src}')">
+        <div class="modal-photo-caption">${ph.caption}</div>
+      </div>`
+    ).join('');
+    modalPhotos.style.display = 'flex';
+  } else {
+    modalPhotos.style.display = 'none';
+    modalPhotos.innerHTML = '';
+  }
 
-  // Étiquette PERMANENTE (tooltip toujours visible)
-  const labelText = `<span class="lbl-name">${step.order}. ${step.name}</span><span class="lbl-desc">${step.desc}</span>`;
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
 
-  const label = marker.bindTooltip(labelText, {
-    permanent: true,
-    direction: step.order % 2 === 0 ? 'left' : 'right',
-    offset: step.order % 2 === 0 ? [-18, 0] : [18, 0],
-    className: 'permanent-label'
-  });
-  labels.push(label);
+function closeModal() {
+  modal.style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+document.getElementById('modal-close').addEventListener('click', closeModal);
+modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+
+// Lightbox
+function openLightbox(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').style.display = 'flex';
+}
+document.getElementById('lightbox').addEventListener('click', () => {
+  document.getElementById('lightbox').style.display = 'none';
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    if (document.getElementById('lightbox').style.display === 'flex') {
+      document.getElementById('lightbox').style.display = 'none';
+    } else if (modal.style.display !== 'none') {
+      closeModal();
+    } else {
+      map.flyToBounds(allBounds.pad(0.12), { duration: 1.0 });
+    }
+  }
 });
 
 // ============================================================
-// BOUTON — Afficher/Masquer les étiquettes
+// MARQUEURS
+// ============================================================
+const allMarkers = [];
+let labelsVisible = true;
+
+// Marqueurs prologue
+prologue.forEach(item => {
+  const iconHtml = `<div class="custom-marker prologue-marker">${item.id}</div>`;
+  const icon = L.divIcon({ html: iconHtml, className: '', iconSize: [24, 24], iconAnchor: [12, 12] });
+  const marker = L.marker([item.lat, item.lon], { icon }).addTo(map);
+  allMarkers.push({ marker, item, isPrologue: true });
+
+  const labelText = `<span class="lbl-name">${item.id}. ${item.name}</span><span class="lbl-desc">${item.desc}</span><span class="lbl-more">▶ Cliquer pour les détails</span>`;
+  marker.bindTooltip(labelText, {
+    permanent: true,
+    direction: 'right', offset: [14, 0],
+    className: 'permanent-label prologue-tip'
+  });
+  marker.on('click', () => openModal(item, true));
+});
+
+// Marqueurs campagne principale
+const campaignMarkers = [];
+steps.forEach((step, index) => {
+  const iconSize = step.finale ? 34 : 26;
+  const iconHtml = `<div class="custom-marker${step.finale ? ' finale' : ''}" style="border-color:${step.color}; color:${step.finale ? '#0d1117' : step.color};${step.finale ? 'background:'+step.color+';' : ''}">${step.order}</div>`;
+  const icon = L.divIcon({ html: iconHtml, className: '', iconSize: [iconSize, iconSize], iconAnchor: [iconSize/2, iconSize/2] });
+  const marker = L.marker([step.lat, step.lon], { icon }).addTo(map);
+  campaignMarkers.push(marker);
+  allMarkers.push({ marker, item: step, isPrologue: false });
+
+  const labelText = `<span class="lbl-name">${step.order}. ${step.name}</span><span class="lbl-desc">${step.desc}</span><span class="lbl-more">▶ Cliquer pour les détails</span>`;
+  marker.bindTooltip(labelText, {
+    permanent: true,
+    direction: step.order % 2 === 0 ? 'left' : 'right',
+    offset:    step.order % 2 === 0 ? [-18, 0] : [18, 0],
+    className: 'permanent-label'
+  });
+  marker.on('click', () => openModal(step, false));
+});
+
+// ============================================================
+// BOUTON TOGGLE ÉTIQUETTES
 // ============================================================
 document.getElementById('toggle-labels').addEventListener('click', () => {
   labelsVisible = !labelsVisible;
-  markers.forEach((marker, i) => {
+  allMarkers.forEach(({ marker, item, isPrologue }) => {
     if (labelsVisible) {
-      const step = steps[i];
-      const labelText = `<span class="lbl-name">${step.order}. ${step.name}</span><span class="lbl-desc">${step.desc}</span>`;
+      const labelText = isPrologue
+        ? `<span class="lbl-name">${item.id}. ${item.name}</span><span class="lbl-desc">${item.desc}</span><span class="lbl-more">▶ Cliquer pour les détails</span>`
+        : `<span class="lbl-name">${item.order}. ${item.name}</span><span class="lbl-desc">${item.desc}</span><span class="lbl-more">▶ Cliquer pour les détails</span>`;
+      const dir = isPrologue ? 'right' : (item.order % 2 === 0 ? 'left' : 'right');
+      const off = isPrologue ? [14, 0] : (item.order % 2 === 0 ? [-18, 0] : [18, 0]);
       marker.bindTooltip(labelText, {
-        permanent: true,
-        direction: step.order % 2 === 0 ? 'left' : 'right',
-        offset: step.order % 2 === 0 ? [-18, 0] : [18, 0],
-        className: 'permanent-label'
+        permanent: true, direction: dir, offset: off,
+        className: 'permanent-label' + (isPrologue ? ' prologue-tip' : '')
       });
     } else {
       marker.unbindTooltip();
@@ -510,10 +811,41 @@ document.getElementById('toggle-labels').addEventListener('click', () => {
 });
 
 // ============================================================
-// BARRE LATÉRALE — Liste cliquable des étapes
+// BARRE LATÉRALE
 // ============================================================
 const stepsContainer = document.getElementById('steps-list');
 
+// En-tête prologue
+const prologueHeader = document.createElement('div');
+prologueHeader.className = 'section-header prologue-header';
+prologueHeader.innerHTML = '◆ Prologue · 1940–1943';
+stepsContainer.appendChild(prologueHeader);
+
+// Étapes prologue
+prologue.forEach(item => {
+  const card = document.createElement('div');
+  card.className = 'step-card prologue-card';
+  card.innerHTML = `
+    <div class="step-num">${item.id}</div>
+    <div class="step-info">
+      <div class="step-name">${item.name} <span style="color:${PROLOGUE_COLOR}; font-size:0.65rem;">● ${item.region}</span></div>
+      <div class="step-desc">${item.desc}</div>
+      <div class="step-more">▶ Cliquer pour les détails</div>
+    </div>`;
+  card.addEventListener('click', () => {
+    map.flyTo([item.lat, item.lon], 7, { duration: 1.2, easeLinearity: 0.25 });
+    setTimeout(() => openModal(item, true), 400);
+  });
+  stepsContainer.appendChild(card);
+});
+
+// En-tête campagne
+const campaignHeader = document.createElement('div');
+campaignHeader.className = 'section-header campaign-header';
+campaignHeader.innerHTML = '★ Campagne 12ᵉ RCA · 2ᵉ DB · 1943–1945';
+stepsContainer.appendChild(campaignHeader);
+
+// Étapes campagne
 steps.forEach(step => {
   const card = document.createElement('div');
   card.className = 'step-card' + (step.finale ? ' finale' : '');
@@ -522,44 +854,23 @@ steps.forEach(step => {
     <div class="step-info">
       <div class="step-name">${step.name} <span style="color:${step.color}; font-size:0.65rem;">● ${step.region}</span></div>
       <div class="step-desc">${step.desc}</div>
-    </div>
-  `;
-
+      <div class="step-more">▶ Cliquer pour les détails${step.photos && step.photos.length ? ' · 📷 photo' : ''}</div>
+    </div>`;
   card.addEventListener('click', () => {
-    map.flyTo([step.lat, step.lon], step.finale ? 7 : 8, {
-      duration: 1.2,
-      easeLinearity: 0.25
-    });
-    // Flash effet sur le marker
-    const markerEl = markers[step.order - 1].getElement();
-    if (markerEl) {
-      markerEl.style.transform = 'scale(1.5)';
-      setTimeout(() => { markerEl.style.transform = ''; }, 300);
-    }
+    map.flyTo([step.lat, step.lon], step.finale ? 7 : 8, { duration: 1.2, easeLinearity: 0.25 });
+    const markerEl = campaignMarkers[step.order - 1].getElement();
+    if (markerEl) { markerEl.style.transform = 'scale(1.5)'; setTimeout(() => { markerEl.style.transform = ''; }, 300); }
+    setTimeout(() => openModal(step, false), 400);
   });
-
   stepsContainer.appendChild(card);
 });
 
 // ============================================================
-// AJUSTEMENT — Zoom pour voir tout le parcours
+// VUE INITIALE
 // ============================================================
-const allCoords = steps.map(s => [s.lat, s.lon]);
-const bounds = L.latLngBounds(allCoords);
-map.fitBounds(bounds.pad(0.18));
-
-// ============================================================
-// Touche Échap pour reset vue
-// ============================================================
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    map.flyToBounds(bounds.pad(0.18), { duration: 1.0 });
-  }
-});
-
-console.log('🗺️  Carte du parcours militaire d\'Alfred Marafico prête.');
-console.log('   27 étapes | 12ᵉ RCA · 2ᵉ DB Leclerc | 1943–1945');
-console.log('   Appuyez sur Échap pour réinitialiser la vue.');
+const allCoords = [...prologue.map(p => [p.lat, p.lon]), ...steps.map(s => [s.lat, s.lon])];
+const allBounds = L.latLngBounds(allCoords);
+map.fitBounds(allBounds.pad(0.12));
 </script>
 </body>
 </html>
