@@ -231,14 +231,91 @@
   #lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 3000; display: none; align-items: center; justify-content: center; cursor: zoom-out; }
   #lightbox img { max-width: 90vw; max-height: 90vh; border-radius: 8px; box-shadow: 0 0 40px rgba(0,0,0,0.8); }
 
-  /* Responsive */
+  /* ===================================================
+     MOBILE — bottom sheet + plein écran
+     =================================================== */
+  #mobile-open-btn {
+    display: none;
+    position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%);
+    z-index: 1100;
+    background: #111a26; border: 1.5px solid #c9a84c; color: #ffe680;
+    font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700;
+    padding: 11px 26px; border-radius: 24px; cursor: pointer; white-space: nowrap;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.7), 0 0 14px rgba(201,168,76,0.3);
+    letter-spacing: 0.06em;
+  }
+  #sidebar-backdrop {
+    display: none;
+    position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1040;
+  }
+
   @media (max-width: 768px) {
-    #sidebar { width: 100%; height: auto; max-height: 40vh; position: fixed; bottom: 0; top: auto; border-right: none; border-top: 2px solid #2c3e50; border-radius: 16px 16px 0 0; padding: 16px 18px 10px; }
-    .sidebar-header h1 { font-size: 1.1rem; }
-    .steps-container { max-height: 150px; }
-    .modal-box { padding: 22px 20px 20px; }
-    .modal-num { font-size: 1.6rem; min-width: 40px; }
+    /* Carte plein écran */
+    #map { position: fixed; inset: 0; width: 100%; height: 100%; }
+    #toggle-labels { display: none; }
+
+    /* Sidebar = bottom sheet caché par défaut */
+    #sidebar {
+      width: 100%; height: 72vh;
+      position: fixed; bottom: -72vh; top: auto;
+      left: 0; right: 0;
+      border-right: none;
+      border-top: 1.5px solid #2c3e50;
+      border-radius: 20px 20px 0 0;
+      padding: 0 20px 30px;
+      transition: bottom 0.38s cubic-bezier(0.34, 1.3, 0.64, 1);
+      z-index: 1050; overflow-y: auto;
+    }
+    /* Poignée de glissement */
+    #sidebar::before {
+      content: '';
+      display: block; width: 44px; height: 4px;
+      background: #3a5068; border-radius: 2px;
+      margin: 14px auto 14px; flex-shrink: 0;
+    }
+    body.sidebar-open #sidebar { bottom: 0; }
+    body.sidebar-open #sidebar-backdrop { display: block; }
+
+    /* Bouton flottant */
+    #mobile-open-btn { display: flex; align-items: center; gap: 8px; }
+    body.sidebar-open #mobile-open-btn { display: none; }
+
+    /* Header compact */
+    .sidebar-header { padding-bottom: 10px; margin-bottom: 12px; }
+    .sidebar-header .insigne { font-size: 28px; margin-bottom: 3px; }
+    .sidebar-header h1 { font-size: 1.05rem; }
+    .sidebar-header .subtitle { display: none; }
+    .sidebar-header .dates { font-size: 0.78rem; padding: 4px 14px; margin-top: 6px; }
+
+    /* Légende masquée sur mobile (trop petite) */
+    .legend-box { display: none; }
+
+    /* Section headers */
+    .section-header { font-size: 0.68rem; padding: 8px 12px 6px; }
+
+    /* Cartes tactiles plus grandes */
+    .step-card { padding: 12px 14px; gap: 12px; min-height: 56px; }
+    .step-card .step-num { font-size: 1.2rem; min-width: 28px; }
+    .step-card .step-name { font-size: 0.9rem; }
+    .step-card .step-desc { font-size: 0.8rem; }
+    .step-card .step-more { font-size: 0.7rem; }
+
+    /* Modal plein écran par le bas */
+    .modal-overlay { align-items: flex-end; padding: 0; }
+    .modal-box {
+      width: 100%; max-width: none; max-height: 90vh;
+      border-radius: 20px 20px 0 0;
+      padding: 24px 18px 34px;
+      overflow-y: auto;
+    }
+    .modal-num { font-size: 1.5rem; min-width: 38px; }
     .modal-name { font-size: 1.1rem; }
+    .modal-summary { font-size: 0.92rem; }
+    .modal-details-text { font-size: 0.88rem; }
+
+    /* Photos en colonne sur mobile */
+    .modal-photos { flex-direction: column; }
+    .modal-photo-block { max-width: 100%; min-width: 0; }
   }
 </style>
 </head>
@@ -246,6 +323,8 @@
 
 <div id="map"></div>
 <button id="toggle-labels" title="Afficher/Masquer les descriptions">📝 Étiquettes</button>
+<button id="mobile-open-btn">☰ Étapes</button>
+<div id="sidebar-backdrop"></div>
 
 <!-- LIGHTBOX -->
 <div id="lightbox"><img id="lightbox-img" src="" alt=""></div>
@@ -333,7 +412,9 @@ const prologue = [
       "Ces dépôts jouent un rôle administratif et logistique : on y enregistre les conscrits, vérifie leur état de santé, distribue uniformes et équipement. Pour des raisons administratives, Alfred est rattaché sur le papier au 3ᵉ puis au 23ᵉ régiment, sans être engagé en unité de combat. C'est le moment où le jeune épicier de Metlaoui commence à devenir soldat — précisément le jour où Pétain demande l'armistice."
     ],
     lat: 36.365, lon: 6.615,
-    photos: []
+    photos: [
+      { src: "Images/Alfred_zouave.jpg", caption: "Alfred Marafico en tenue de Zouave, 1940" }
+    ]
   },
   {
     id: "P3",
@@ -392,7 +473,7 @@ const steps = [
     desc: "4 mars 1943 — Arrivée au 12ᵉ RCA. 4ᵉ escadron (Cne PICQUART, puis HARGOUS). Peloton d'éclaireurs.",
     details: [
       "Alfred arrive au 12ᵉ Régiment de Chasseurs d'Afrique le 4 mars 1943, placé au 4ᵉ escadron commandé par le capitaine PICQUART, bientôt remplacé par le capitaine HARGOUS. Le 4ᵉ escadron fait partie du 2ᵉ groupe (chef d'escadrons de FÜRST), stationné à Hammam-Bou-Hadjar, à quelques kilomètres de la Méditerranée et à environ 80 km de la frontière marocaine.",
-      "D'après la transmission familiale et une photo conservée, Alfred fait partie du peloton d'éclaireurs du 4ᵉ escadron — des soldats en Jeep qui partaient en reconnaissance en avant des chars Sherman, parfois à pied, pour sécuriser les itinéraires. Ce rôle, qui impliquait de marcher à proximité des blindés, correspond à la mémoire familiale selon laquelle il « marchait à côté du char ».",
+      "D'après la transmission familiale et une photo conservée, Alfred est affecté au rôle d'éclaireur du 4ᵉ escadron. Ces hommes partaient en reconnaissance en avant des chars Sherman, parfois à pied, pour déceler les armes anti-chars allemands et, si possible, les neutraliser avant qu'ils ne tirent. Ce rôle, qui impliquait de marcher à proximité des blindés, correspond exactement à la mémoire familiale selon laquelle il « marchait à côté du char ». Le 2 septembre 1944, le Chef d'Escadrons MINJONNET, commandant le 12ᵉ R.C.A., constituera officiellement ce Peloton d'Éclaireurs : 34 hommes dont 5 sous-officiers, 5 Jeeps armées de mitrailleuses .30 (7,62 mm), sous le commandement du Lieutenant CHEVALLIER, secondé par le S/Lieutenant SERVANT et l'Aspirant SRIBNY dit SBY.",
       "Alfred prend une permission exceptionnelle le 13 juin 1943 et rentre le 19 juillet 1943. C'est à cette époque que de LANGLADE rencontre LECLERC à Alger et décide d'intégrer le 12ᵉ RCA dans la 2ᵉ DB en formation."
     ],
     lat: 35.3667, lon: -0.9500, color: "#e67e22",
@@ -533,6 +614,7 @@ const steps = [
     desc: "24 août 1944 — Combats de la Vallée de la Bièvre. Bataille de Paris.",
     details: [
       "Alfred participe à la bataille de Paris du 23 août au 7 septembre 1944. Le 24 août, il prend part aux combats de la Vallée de la Bièvre, dans les faubourgs sud de Paris.",
+      "Le 2 septembre 1944, le Chef d'Escadrons MINJONNET, commandant le 12ᵉ R.C.A., constitue officiellement un Peloton d'Éclaireurs. Sa mission : partir à l'avant des chars, déceler les armes anti-chars allemands et si possible les neutraliser avant qu'ils tirent. Le peloton compte 34 hommes dont 5 sous-officiers, équipés de 5 Jeeps armées de mitrailleuses .30 (7,62 mm). Il est commandé par le Lieutenant CHEVALLIER, secondé par le S/Lieutenant SERVANT et l'Aspirant SRIBNY dit SBY. Alfred est dans ce peloton.",
       "Après la libération, le Sous-Groupement fait relâche à Villetaneuse et Montmagny pour entretenir les véhicules. Des permissions de 24 heures permettent aux soldats de se rendre à Paris. LECLERC obtient des Américains l'accord de continuer vers l'est, vers Strasbourg."
     ],
     lat: 48.7960, lon: 2.3270, color: "#2ecc71", photos: []
@@ -939,6 +1021,32 @@ function setupSectionToggle(btnId, layer, cardEls) {
 
 setupSectionToggle('toggle-prologue', prologueLayer, prologueCardEls);
 setupSectionToggle('toggle-campaign', campaignLayer, campaignCardEls);
+
+// ============================================================
+// MOBILE — bottom sheet sidebar
+// ============================================================
+const mobileBtn = document.getElementById('mobile-open-btn');
+const backdrop  = document.getElementById('sidebar-backdrop');
+
+function openSidebar()  { document.body.classList.add('sidebar-open'); }
+function closeSidebar() { document.body.classList.remove('sidebar-open'); }
+
+mobileBtn.addEventListener('click', openSidebar);
+backdrop.addEventListener('click', closeSidebar);
+
+// Sur mobile, masquer les étiquettes par défaut (trop chargé)
+if (window.innerWidth <= 768) {
+  labelsVisible = false;
+  map.getContainer().classList.add('labels-hidden');
+}
+
+// Sur mobile, fermer la sidebar dès qu'on tape sur une carte ou un tooltip
+document.addEventListener('click', e => {
+  if (window.innerWidth > 768) return;
+  if (e.target.closest('.step-card') || e.target.closest('.permanent-label')) {
+    closeSidebar();
+  }
+}, true);
 </script>
 </body>
 </html>
