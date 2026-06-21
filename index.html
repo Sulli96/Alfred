@@ -112,6 +112,17 @@
   .step-card.prologue-card .step-more { color: #b5936a; }
   .step-card.finale { border-color: #c9a84c44; background: rgba(201,168,76,0.08); }
   .step-card.finale .step-num { color: #e6d088; font-size: 1.5rem; }
+  .step-card.active { background: rgba(40,62,88,0.85); border-color: #c9a84c; box-shadow: inset 3px 0 0 #c9a84c; }
+  .step-card.prologue-card.active { background: rgba(60,38,18,0.85); border-color: #b5936a; box-shadow: inset 3px 0 0 #b5936a; }
+
+  /* Bouton masquer/afficher dans les en-têtes de section */
+  .section-toggle { float: right; font-size: 0.7rem; font-family: 'Segoe UI', sans-serif; font-weight: 600;
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 10px;
+    color: rgba(255,255,255,0.7); cursor: pointer; padding: 2px 8px; letter-spacing: 0.04em; transition: all 0.2s; }
+  .section-toggle:hover { background: rgba(255,255,255,0.15); color: #fff; }
+  .section-toggle.off { opacity: 0.5; }
+  /* Masquage des cartes de section */
+  .step-card.section-hidden { display: none; }
 
   /* --- Footer --- */
   .sidebar-footer { text-align: center; padding-top: 14px; border-top: 1px solid #3a5068; margin-top: 12px; font-size: 0.82rem; color: #8899aa; letter-spacing: 0.04em; flex-shrink: 0; }
@@ -122,13 +133,18 @@
     color: #fff; font-family: 'Segoe UI', Arial, sans-serif; font-size: 0.9rem; font-weight: 500;
     padding: 12px 16px; box-shadow: 0 6px 24px rgba(0,0,0,0.8), 0 0 12px rgba(201,168,76,0.2);
     white-space: normal; max-width: 300px; text-align: left; pointer-events: auto; line-height: 1.5;
+    cursor: pointer; transition: border-color 0.2s, box-shadow 0.2s;
   }
+  .leaflet-tooltip.permanent-label:hover { border-color: #c9a84c; box-shadow: 0 6px 24px rgba(0,0,0,0.8), 0 0 16px rgba(201,168,76,0.45); }
   .leaflet-tooltip.permanent-label::before { border-top-color: #6b8aaa !important; }
   .leaflet-tooltip.permanent-label .lbl-name { font-weight: 700; color: #ffe680; font-size: 0.95rem; display: block; margin-bottom: 5px; letter-spacing: 0.04em; }
   .leaflet-tooltip.permanent-label.prologue-tip { border-color: #7a5a38; }
+  .leaflet-tooltip.permanent-label.prologue-tip:hover { border-color: #b5936a; box-shadow: 0 6px 24px rgba(0,0,0,0.8), 0 0 16px rgba(181,147,106,0.45); }
   .leaflet-tooltip.permanent-label.prologue-tip .lbl-name { color: #d4a87a; }
   .leaflet-tooltip.permanent-label .lbl-desc { color: #e8e8e8; font-size: 0.85rem; font-style: italic; line-height: 1.5; }
-  .leaflet-tooltip.permanent-label .lbl-more { display: block; margin-top: 6px; font-size: 0.78rem; color: #c9a84c; cursor: pointer; }
+  .leaflet-tooltip.permanent-label .lbl-more { display: block; margin-top: 6px; font-size: 0.78rem; color: #c9a84c; }
+  /* Masquage des étiquettes via classe CSS (évite de rebinder les tooltips) */
+  .labels-hidden .leaflet-tooltip.permanent-label { display: none !important; }
 
   /* --- Custom markers --- */
   .custom-marker {
@@ -303,7 +319,7 @@ const prologue = [
       "Alfred Marafico naît le 9 janvier 1920 à Metlaoui, petite ville minière de phosphates du sud tunisien, fils d'immigrés italiens. En 1940, il est épicier, avec un niveau d'instruction minimal (niveau 1 : sait lire et écrire). Il est inscrit sous le n°12 de la liste du canton de Gafsa, dans la première partie — les conscrits prioritaires.",
       "En juin 1940, alors que la France s'effondre face à l'Allemagne, il est appelé sous les drapeaux. C'est le début d'un parcours qui le mènera de la Tunisie jusqu'aux frontières de l'Allemagne."
     ],
-    lat: 34.387, lon: 8.404,
+    lat: 34.392, lon: 8.400,
     photos: []
   },
   {
@@ -346,7 +362,7 @@ const prologue = [
       "Alfred rentre à Metlaoui après sa libération du Chantier 105 et reprend sa vie civile pendant deux ans. La Tunisie est sous contrôle de Vichy, l'armée française réduite à sa plus simple expression, l'armement contrôlé par les commissions d'armistice germano-italiennes.",
       "Pendant ce temps, en novembre 1942, l'Opération Torch débarque les Alliés en Afrique du Nord. La Tunisie bascule dans le camp allié. La campagne de Tunisie (fin 1942 – mai 1943) mobilise d'urgence les jeunes hommes disponibles. Le 10 février 1943, Alfred est rappelé au Chantier 105."
     ],
-    lat: 34.387, lon: 8.404,
+    lat: 34.381, lon: 8.411, tipDir: 'left',
     photos: []
   },
   {
@@ -359,7 +375,7 @@ const prologue = [
       "Le 10 février 1943, Alfred est rappelé au Chantier 105 à Tabarka. Cette fois, l'enjeu est tout autre : les Chantiers de Jeunesse, initialement civils, deviennent des centres de mobilisation d'urgence pour alimenter les unités combattantes qui se reforment dans le sillage de l'Opération Torch.",
       "Quelques semaines plus tard, le 27 février 1943, Alfred est versé au 12ᵉ Régiment de Chasseurs d'Afrique. Il arrive au régiment le 4 mars 1943 à Hammam-Bou-Hadjar, en Algérie — le début de sa vraie carrière militaire."
     ],
-    lat: 36.958, lon: 8.760,
+    lat: 36.949, lon: 8.766, tipDir: 'left',
     photos: [
       { src: "Images/Ecussion_Chantier_Jeunesse105.jpg", caption: "Écusson du Groupement n°105 « Saint-Louis »" }
     ]
@@ -656,18 +672,20 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { m
 L.control.zoom({ position: 'bottomright' }).addTo(map);
 L.control.attribution({ position: 'bottomleft', prefix: '' }).addTo(map);
 
+// Layer groups séparés pour pouvoir masquer prologue ou campagne indépendamment
+const prologueLayer = L.layerGroup().addTo(map);
+const campaignLayer = L.layerGroup().addTo(map);
+
 // Tracé prologue (sépia, tirets)
 const prologueCoords = prologue.map(p => [p.lat, p.lon]);
-// Ajouter la connexion vers la première étape principale
-prologueCoords.push([steps[0].lat, steps[0].lon]);
-
-L.polyline(prologueCoords, { color: PROLOGUE_COLOR, weight: 6, opacity: 0.12, lineCap: 'round' }).addTo(map);
-L.polyline(prologueCoords, { color: PROLOGUE_COLOR, weight: 2, opacity: 0.55, dashArray: '5 6', lineCap: 'round' }).addTo(map);
+prologueCoords.push([steps[0].lat, steps[0].lon]); // connexion vers la campagne
+L.polyline(prologueCoords, { color: PROLOGUE_COLOR, weight: 6, opacity: 0.12, lineCap: 'round' }).addTo(prologueLayer);
+L.polyline(prologueCoords, { color: PROLOGUE_COLOR, weight: 2, opacity: 0.55, dashArray: '5 6', lineCap: 'round' }).addTo(prologueLayer);
 
 // Tracé campagne principale (doré)
 const campaignCoords = steps.map(s => [s.lat, s.lon]);
-L.polyline(campaignCoords, { color: '#c9a84c', weight: 8, opacity: 0.18, lineCap: 'round' }).addTo(map);
-L.polyline(campaignCoords, { color: '#c9a84c', weight: 3, opacity: 0.75, dashArray: '8 4', lineCap: 'round' }).addTo(map);
+L.polyline(campaignCoords, { color: '#c9a84c', weight: 8, opacity: 0.18, lineCap: 'round' }).addTo(campaignLayer);
+L.polyline(campaignCoords, { color: '#c9a84c', weight: 3, opacity: 0.75, dashArray: '8 4', lineCap: 'round' }).addTo(campaignLayer);
 
 // ============================================================
 // MODAL
@@ -714,6 +732,15 @@ function openModal(item, isPrologue) {
 
   modal.style.display = 'flex';
   document.body.style.overflow = 'hidden';
+
+  // Mettre en évidence la carte correspondante dans la sidebar
+  const cardKey = isPrologue ? item.id : item.order;
+  document.querySelectorAll('.step-card').forEach(c => c.classList.remove('active'));
+  const activeCard = cardMap.get(cardKey);
+  if (activeCard) {
+    activeCard.classList.add('active');
+    activeCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
 }
 
 function closeModal() {
@@ -751,29 +778,28 @@ document.addEventListener('keydown', e => {
 const allMarkers = [];
 let labelsVisible = true;
 
-// Marqueurs prologue
-prologue.forEach(item => {
+// Marqueurs prologue → ajoutés dans prologueLayer
+prologue.forEach((item, pIdx) => {
   const iconHtml = `<div class="custom-marker prologue-marker">${item.id}</div>`;
   const icon = L.divIcon({ html: iconHtml, className: '', iconSize: [24, 24], iconAnchor: [12, 12] });
-  const marker = L.marker([item.lat, item.lon], { icon }).addTo(map);
+  const marker = L.marker([item.lat, item.lon], { icon }).addTo(prologueLayer);
   allMarkers.push({ marker, item, isPrologue: true });
 
+  // tipDir optionnel dans les données (pour les doublons de lieux comme P4/P5)
+  const dir = item.tipDir || (pIdx % 2 === 0 ? 'right' : 'left');
+  const off = dir === 'right' ? [14, 0] : [-14, 0];
   const labelText = `<span class="lbl-name">${item.id}. ${item.name}</span><span class="lbl-desc">${item.desc}</span><span class="lbl-more">▶ Cliquer pour les détails</span>`;
-  marker.bindTooltip(labelText, {
-    permanent: true,
-    direction: 'right', offset: [14, 0],
-    className: 'permanent-label prologue-tip'
-  });
+  marker.bindTooltip(labelText, { permanent: true, direction: dir, offset: off, className: 'permanent-label prologue-tip' });
   marker.on('click', () => openModal(item, true));
 });
 
-// Marqueurs campagne principale
+// Marqueurs campagne → ajoutés dans campaignLayer
 const campaignMarkers = [];
 steps.forEach((step, index) => {
   const iconSize = step.finale ? 34 : 26;
   const iconHtml = `<div class="custom-marker${step.finale ? ' finale' : ''}" style="border-color:${step.color}; color:${step.finale ? '#0d1117' : step.color};${step.finale ? 'background:'+step.color+';' : ''}">${step.order}</div>`;
   const icon = L.divIcon({ html: iconHtml, className: '', iconSize: [iconSize, iconSize], iconAnchor: [iconSize/2, iconSize/2] });
-  const marker = L.marker([step.lat, step.lon], { icon }).addTo(map);
+  const marker = L.marker([step.lat, step.lon], { icon }).addTo(campaignLayer);
   campaignMarkers.push(marker);
   allMarkers.push({ marker, item: step, isPrologue: false });
 
@@ -788,25 +814,33 @@ steps.forEach((step, index) => {
 });
 
 // ============================================================
-// BOUTON TOGGLE ÉTIQUETTES
+// CLIC SUR TOOLTIP — délégation au niveau document
+// pointer-events:auto empêche les clics de remonter au marker;
+// on intercepte donc au niveau du document et on cherche quel
+// marker correspond au tooltip cliqué.
+// ============================================================
+document.addEventListener('click', e => {
+  const tip = e.target.closest('.permanent-label');
+  if (!tip) return;
+  for (const { marker, item, isPrologue } of allMarkers) {
+    const tt = marker.getTooltip();
+    if (tt && tt.getElement() === tip) {
+      openModal(item, isPrologue);
+      return;
+    }
+  }
+});
+
+// ============================================================
+// BOUTON TOGGLE ÉTIQUETTES — masquage via classe CSS uniquement
 // ============================================================
 document.getElementById('toggle-labels').addEventListener('click', () => {
   labelsVisible = !labelsVisible;
-  allMarkers.forEach(({ marker, item, isPrologue }) => {
-    if (labelsVisible) {
-      const labelText = isPrologue
-        ? `<span class="lbl-name">${item.id}. ${item.name}</span><span class="lbl-desc">${item.desc}</span><span class="lbl-more">▶ Cliquer pour les détails</span>`
-        : `<span class="lbl-name">${item.order}. ${item.name}</span><span class="lbl-desc">${item.desc}</span><span class="lbl-more">▶ Cliquer pour les détails</span>`;
-      const dir = isPrologue ? 'right' : (item.order % 2 === 0 ? 'left' : 'right');
-      const off = isPrologue ? [14, 0] : (item.order % 2 === 0 ? [-18, 0] : [18, 0]);
-      marker.bindTooltip(labelText, {
-        permanent: true, direction: dir, offset: off,
-        className: 'permanent-label' + (isPrologue ? ' prologue-tip' : '')
-      });
-    } else {
-      marker.unbindTooltip();
-    }
-  });
+  if (labelsVisible) {
+    map.getContainer().classList.remove('labels-hidden');
+  } else {
+    map.getContainer().classList.add('labels-hidden');
+  }
   document.getElementById('toggle-labels').textContent = labelsVisible ? '📝 Étiquettes' : '📝 Étiquettes (masquées)';
 });
 
@@ -814,14 +848,17 @@ document.getElementById('toggle-labels').addEventListener('click', () => {
 // BARRE LATÉRALE
 // ============================================================
 const stepsContainer = document.getElementById('steps-list');
+// Référence sur chaque carte de la sidebar pour l'état actif
+const cardMap = new Map(); // "P1"../"P5" ou 1..27 → élément DOM
 
-// En-tête prologue
+// En-tête prologue avec bouton toggle
 const prologueHeader = document.createElement('div');
 prologueHeader.className = 'section-header prologue-header';
-prologueHeader.innerHTML = '◆ Prologue · 1940–1943';
+prologueHeader.innerHTML = '◆ Prologue · 1940–1943 <button class="section-toggle" id="toggle-prologue">Masquer</button>';
 stepsContainer.appendChild(prologueHeader);
 
 // Étapes prologue
+const prologueCardEls = [];
 prologue.forEach(item => {
   const card = document.createElement('div');
   card.className = 'step-card prologue-card';
@@ -830,22 +867,25 @@ prologue.forEach(item => {
     <div class="step-info">
       <div class="step-name">${item.name} <span style="color:${PROLOGUE_COLOR}; font-size:0.65rem;">● ${item.region}</span></div>
       <div class="step-desc">${item.desc}</div>
-      <div class="step-more">▶ Cliquer pour les détails</div>
+      <div class="step-more">▶ Cliquer pour les détails${item.photos && item.photos.length ? ' · 📷 photo' : ''}</div>
     </div>`;
   card.addEventListener('click', () => {
     map.flyTo([item.lat, item.lon], 7, { duration: 1.2, easeLinearity: 0.25 });
     setTimeout(() => openModal(item, true), 400);
   });
+  cardMap.set(item.id, card);
+  prologueCardEls.push(card);
   stepsContainer.appendChild(card);
 });
 
-// En-tête campagne
+// En-tête campagne avec bouton toggle
 const campaignHeader = document.createElement('div');
 campaignHeader.className = 'section-header campaign-header';
-campaignHeader.innerHTML = '★ Campagne 12ᵉ RCA · 2ᵉ DB · 1943–1945';
+campaignHeader.innerHTML = '★ Campagne 12ᵉ RCA · 2ᵉ DB · 1943–1945 <button class="section-toggle" id="toggle-campaign">Masquer</button>';
 stepsContainer.appendChild(campaignHeader);
 
 // Étapes campagne
+const campaignCardEls = [];
 steps.forEach(step => {
   const card = document.createElement('div');
   card.className = 'step-card' + (step.finale ? ' finale' : '');
@@ -862,6 +902,8 @@ steps.forEach(step => {
     if (markerEl) { markerEl.style.transform = 'scale(1.5)'; setTimeout(() => { markerEl.style.transform = ''; }, 300); }
     setTimeout(() => openModal(step, false), 400);
   });
+  cardMap.set(step.order, card);
+  campaignCardEls.push(card);
   stepsContainer.appendChild(card);
 });
 
@@ -871,6 +913,32 @@ steps.forEach(step => {
 const allCoords = [...prologue.map(p => [p.lat, p.lon]), ...steps.map(s => [s.lat, s.lon])];
 const allBounds = L.latLngBounds(allCoords);
 map.fitBounds(allBounds.pad(0.12));
+
+// ============================================================
+// TOGGLE PROLOGUE / CAMPAGNE
+// ============================================================
+function setupSectionToggle(btnId, layer, cardEls) {
+  let visible = true;
+  document.getElementById(btnId).addEventListener('click', e => {
+    e.stopPropagation();
+    visible = !visible;
+    const btn = document.getElementById(btnId);
+    if (visible) {
+      map.addLayer(layer);
+      cardEls.forEach(c => c.classList.remove('section-hidden'));
+      btn.textContent = 'Masquer';
+      btn.classList.remove('off');
+    } else {
+      map.removeLayer(layer);
+      cardEls.forEach(c => c.classList.add('section-hidden'));
+      btn.textContent = 'Afficher';
+      btn.classList.add('off');
+    }
+  });
+}
+
+setupSectionToggle('toggle-prologue', prologueLayer, prologueCardEls);
+setupSectionToggle('toggle-campaign', campaignLayer, campaignCardEls);
 </script>
 </body>
 </html>
