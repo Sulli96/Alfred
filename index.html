@@ -511,6 +511,7 @@ const steps = [
     lat: 33.9267, lon: -6.9076, color: "#e74c3c",
     photos: [
       { src: "Images/Carte_Camp_Temara.jpg", caption: "Plan manuscrit du camp de Témara — le 4ᵉ escadron est en bas à droite" },
+      { src: "Images/List_Vehicule_2emeDB.jpg", caption: "Liste des véhicules de la 2ᵉ Division Blindée — chars Sherman, Jeeps, half-tracks et véhicules de reconnaissance" },
       { src: "Images/Foret_Temara_2026.jpg", caption: "La forêt de Témara aujourd'hui — les allées d'eucalyptus sont celles qu'Alfred a connues" }
     ]
   },
@@ -684,22 +685,39 @@ const steps = [
     desc: "14–17 avril 1945 — Réduction de la poche de Royan. Le Sherman « D'ARCANGUES » du 4ᵉ escadron est engagé.",
     details: [
       "Alfred participe aux opérations du Front de Royan du 14 au 17 avril 1945. Depuis septembre 1944, une poche allemande d'environ 15 000 hommes tient Royan. Le Sherman « D'ARCANGUES » du 4ᵉ escadron — l'escadron d'Alfred — est engagé dans ces combats. Le 14 avril, deux chasseurs du 4ᵉ escadron (sur les chars « MEDOC II » et « SANCERROIS ») sont blessés en introduisant un obus.",
-      "Alfred quitte la zone de Royan le 28 avril et fait mouvement vers le Front de l'Est."
+      "Le 20 avril, Royan est libérée. Le Général LECLERC vient passer en revue le régiment. La remise à disposition de la 2ᵉ DB est ordonnée : les chars partiront par voie ferrée depuis Cognac vers l'Allemagne, les véhicules à roues feront la route."
     ],
     lat: 45.6230, lon: -1.0431, color: "#1abc9c", photos: []
   },
   {
-    order: 22, name: "Frontière allemande", region: "Allemagne",
-    dates: "30 avril – 26 mai 1945",
-    desc: "30 avril 1945 — Franchissement de la frontière. Campagne d'Allemagne avec la 2ᵉ DB.",
+    order: 22, name: "Cognac — Gare d'embarquement", region: "Charente",
+    dates: "24 avril 1945",
+    desc: "24 avril 1945 — Les Sherman du 12ᵉ RCA embarquent sur trains en gare de Cognac, cap à l'est vers l'Alsace et l'Allemagne.",
     details: [
-      "Alfred franchit la frontière allemande le 30 avril 1945 et participe à la campagne d'Allemagne avec la 2ᵉ DB, entrant depuis l'Alsace en traversant le Rhin.",
-      "La 2ᵉ DB fait mouvement vers la France le 24 mai 1945. Alfred franchit à nouveau la frontière le 26 mai et passe dans la zone intérieure française le même jour."
+      "Le 24 avril 1945, les escadrons chars du 12ᵉ R.C.A. embarquent sur trains en gare de Cognac pour faire mouvement vers Brumath, en Alsace. Les véhicules à roues (Jeeps, half-tracks) font la route par leurs propres moyens.",
+      "Tandis que les chars traversent la France par train, l'étau se resserre sur l'Allemagne nazie : l'armée soviétique approche de Berlin, les Alliés progressent vers le Danube. Le 12ᵉ RCA va rejoindre le combat final."
     ],
-    lat: 48.040, lon: 7.620, color: "#c0392b", photos: []
+    lat: 45.6940, lon: -0.3290, color: "#c0392b",
+    photos: [
+      { src: "Images/Sherman_Sur_Train_Gare_De_Cognac.jpg", caption: "Sherman du 12ᵉ RCA embarqués sur wagons plats en gare de Cognac, 24 avril 1945 — direction l'Alsace et l'Allemagne" }
+    ]
   },
   {
-    order: 23, name: "Paris (Retour)", region: "Île-de-France",
+    order: 23, name: "Bavière — Lac Ammersee", region: "Allemagne",
+    dates: "30 avril – 24 mai 1945",
+    desc: "30 avril — Franchissement du Rhin. 4 mai — Schondorf am Ammersee, Bavière. 8 mai — Capitulation de l'Allemagne.",
+    details: [
+      "Débarqués à Brumath (Alsace), les chars du 12ᵉ R.C.A. prennent la route le 30 avril : Bischwiller, franchissement du Rhin, Rastatt, Ettlingen, Durlach, Heilbronn — traversée des ruines de cette petite ville — pour arriver à Gross Erlach. Le Rhin est franchi sur un grand pont de bois de 300 mètres, bien construit par le Génie américain.",
+      "Le 1ᵉʳ mai, en attente de carburant, le régiment stationne à Thannhausen, gros village de Bavière à l'ouest d'Augsbourg. Le 4 mai, il s'implante à Schondorf, joli village au bord du lac Ammersee en Haute-Bavière. C'est là que la capitulation de l'Allemagne nazie est annoncée, le 8 mai 1945.",
+      "Du 25 au 30 mai, le régiment quitte Schondorf et rentre en France : Landsberg, Memmingen, Biberach, Riedlingen, Reutlingen, Tübingen, Karlsruhe, Rastatt, puis franchissement du Rhin sur un pont de bateaux du Génie à Kehl, pour arriver à Fegersheim près de Strasbourg. Alfred franchit la frontière française le 26 mai."
+    ],
+    lat: 47.9880, lon: 11.1270, color: "#c0392b",
+    photos: [
+      { src: "Images/Pont.jpg", caption: "Le pont de bois construit par le Génie américain sur le Rhin — 300 mètres, franchi par le 12ᵉ RCA le 30 avril 1945" }
+    ]
+  },
+  {
+    order: 24, name: "Paris (Retour)", region: "Île-de-France",
     dates: "30 mai 1945",
     desc: "30 mai 1945 — La 2ᵉ DB stationne en région parisienne.",
     details: [
@@ -708,7 +726,7 @@ const steps = [
     lat: 48.8566, lon: 2.3522, color: "#2ecc71", photos: []
   },
   {
-    order: 24, name: "Nemours", region: "Île-de-France",
+    order: 25, name: "Nemours", region: "Île-de-France",
     dates: "3 juin 1945",
     desc: "3 juin 1945 — Cantonnement à Nemours (Seine-et-Marne).",
     details: [
@@ -717,16 +735,16 @@ const steps = [
     lat: 48.2683, lon: 2.6933, color: "#2ecc71", photos: []
   },
   {
-    order: 25, name: "Toulon", region: "Provence",
+    order: 26, name: "Toulon", region: "Provence",
     dates: "11 août 1945",
     desc: "11 août 1945 — Embarquement pour la Tunisie.",
     details: [
-      "Alfred embarque à Toulon le 11 août 1945 à destination de la Tunisie. Il rentre au pays après plus de deux ans de campagnes militaires — de la Normandie à l'Alsace, de Royan à l'Allemagne."
+      "Alfred embarque à Toulon le 11 août 1945 à destination de la Tunisie. Il rentre au pays après plus de deux ans de campagnes militaires — de la Normandie à l'Alsace, de Royan à la Bavière."
     ],
     lat: 43.1242, lon: 5.9280, color: "#2ecc71", photos: []
   },
   {
-    order: 26, name: "Tunis", region: "Tunisie",
+    order: 27, name: "Tunis", region: "Tunisie",
     dates: "13 août – 23 novembre 1945",
     desc: "13 août 1945 — Débarquement à Tunis. Démobilisation le 23 novembre 1945.",
     details: [
@@ -735,7 +753,7 @@ const steps = [
     lat: 36.8065, lon: 10.1815, color: "#f1c40f", photos: []
   },
   {
-    order: 27, name: "Metlaoui", region: "Tunisie",
+    order: 28, name: "Metlaoui", region: "Tunisie",
     dates: "24 novembre 1945",
     desc: "24 nov. 1945 — Démobilisé. Retour à Metlaoui. ✦ FIN DU PARCOURS ✦",
     details: [
